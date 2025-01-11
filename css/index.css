@@ -345,21 +345,20 @@ body {
 }
 
 .social-media-links {
-    height: 100%;
-    position: absolute;
-    width: auto;
-    top: 0;
-    right: 30px;
+    position: fixed;
+    bottom: 15%;
+    left: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: row;
     padding: 20px;
     z-index: 3;
 }
 
 .social-media {
-    margin: 10px;
+    margin: 20px;
     opacity: 0.6;
     transition: all 0.4s ease;
 }
@@ -609,7 +608,7 @@ body {
 }
 
 .cv {
-    padding-top: 40px;
+    padding-top: 60px;
 }
 
 .cv a button {
@@ -1228,6 +1227,8 @@ button:hover .index {
 .contact-info {
     width: 40%;
     height: 500px;
+    padding-top: 100px;
+    padding-left: 250px;
     background: url(../images/contact-back.jpg);
     background-position: center;
     background-size: cover;
@@ -1247,98 +1248,6 @@ button:hover .index {
     background: #101010;
     opacity: .8;
     pointer-events: none;
-}
-
-.contact-form {
-    height: 550px;
-    padding-right: 40px;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    width: auto;
-    align-items: center;
-    position: relative;
-}
-
-.input-line {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.input-name {
-    width: 40%;
-    padding: 10px 20px;
-    margin: 14px;
-    border-radius: 8px;
-    outline: none;
-    background: #050505;
-    border: none;
-    color: whitesmoke;
-    font-family: poppins;
-    font-size: 18px;
-}
-
-.form-header {
-    font-size: 24px;
-    font-family: poppins;
-    font-weight: 400;
-    color: whitesmoke;
-    padding: 28px;
-}
-
-.input-subject {
-    width: 84%;
-    padding: 10px 20px;
-    margin: 24px;
-    border-radius: 8px;
-    outline: none;
-    background: #050505;
-    border: none;
-    color: whitesmoke;
-    font-family: poppins;
-    font-size: 18px;
-}
-
-.input-textarea {
-    width: 84%;
-    padding: 10px 20px;
-    margin: 15px;
-    height: 150px;
-    border-radius: 8px;
-    outline: none;
-    background: #050505;
-    border: none;
-    color: whitesmoke;
-    font-family: poppins;
-    font-size: 18px;
-}
-
-form button {
-    padding: 8px 24px;
-    font-family: poppins;
-    font-size: 20px;
-    color: whitesmoke;
-    background: #BB0035;
-    opacity: .8;
-    margin: 20px;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    transition: all .4s ease;
-}
-
-form button:hover {
-    opacity: 1;
 }
 
 .contact-info-header {
@@ -1472,26 +1381,6 @@ form button:hover {
     background: #c70039;
 }
 
-.color-purple {
-    background: #481380;
-}
-
-.color-green {
-    background: #04A777;
-}
-
-.color-blue {
-    background: #035aa6;
-}
-
-.color-malt {
-    background: #00909e;
-}
-
-.color-orange {
-    background: #dd7631;
-}
-
 @keyframes rotate {
     0% {
         transform: rotate(0deg);
@@ -1579,15 +1468,15 @@ For devices with smaller width like mobile phone
     }
 
     .social-media-links {
-        position: absolute;
-        bottom: 20px;
+        position: fixed;
+        bottom: 10%;
         left: 0;
         right: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: row;
-        padding: 10px;
+        padding: 20px;
         z-index: 3;
     }
 
@@ -1671,7 +1560,6 @@ For devices with smaller width like mobile phone
         font-size: 20px;
         font-family: poppins;
         width: 95%;
-        padding: 10px;
         font-weight: 400;
     }
 
@@ -1707,15 +1595,15 @@ For devices with smaller width like mobile phone
     }
 
     .about-img img {
-        width: 280px;
-        height: 220px;
+        max-width: 100%;
+        height: auto;
         padding: 5px;
         border-radius: 10%;
     }
 
     .about-img {
         width: 100%;
-        height: 250px;
+        height: auto;
         text-align: center;
         overflow: hidden;
         border-radius: 10%;
@@ -1893,7 +1781,7 @@ For devices with smaller width like mobile phone
         font-size: 15px;
         opacity: .9;
         font-weight: 200;
-        height: 85%;
+        height: 80%;
         padding: 20px;
         letter-spacing: 1px;
     }
@@ -1937,99 +1825,6 @@ For devices with smaller width like mobile phone
         background: #101010;
         opacity: .7;
         pointer-events: none;
-    }
-
-    .contact-form {
-        height: auto;
-        width: 90%;
-        display: flex;
-        padding-bottom: 40px;
-        padding-right: 0px;
-        flex-direction: column;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        width: auto;
-        align-items: center;
-        position: relative;
-    }
-
-    .input-line {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .input-name {
-        width: 90%;
-        padding: 10px 20px;
-        margin: 14px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 16px;
-    }
-
-    .form-header {
-        font-size: 22px;
-        font-family: poppins;
-        font-weight: 400;
-        color: whitesmoke;
-        padding: 20px;
-        padding-top: 0px;
-    }
-
-    .input-subject {
-        width: 90%;
-        padding: 10px 20px;
-        margin: 24px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 16px;
-    }
-
-    .input-textarea {
-        width: 90%;
-        padding: 10px 20px;
-        margin: 15px;
-        height: 140px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 16px;
-    }
-
-    form button {
-        padding: 8px 24px;
-        font-family: poppins;
-        font-size: 20px;
-        color: whitesmoke;
-        opacity: .8;
-        margin: 20px;
-        cursor: pointer;
-        border: none;
-        border-radius: 8px;
-        transition: all .4s ease;
-    }
-
-    form button:hover {
-        opacity: 1;
     }
 
     .contact-info-header {
@@ -2429,7 +2224,7 @@ for tabs and large phones
         font-size: 17px;
         opacity: .9;
         font-weight: 200;
-        height: 85%;
+        height: 80%;
         padding: 20px;
         letter-spacing: 1px;
     }
@@ -2473,99 +2268,6 @@ for tabs and large phones
         background: #101010;
         opacity: .7;
         pointer-events: none;
-    }
-
-    .contact-form {
-        height: auto;
-        width: 90%;
-        display: flex;
-        padding-bottom: 40px;
-        padding-right: 0px;
-        flex-direction: column;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        width: auto;
-        align-items: center;
-        position: relative;
-    }
-
-    .input-line {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .input-name {
-        width: 80%;
-        padding: 10px 20px;
-        margin: 14px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 16px;
-    }
-
-    .form-header {
-        font-size: 22px;
-        font-family: poppins;
-        font-weight: 400;
-        color: whitesmoke;
-        padding: 20px;
-        padding-top: 0px;
-    }
-
-    .input-subject {
-        width: 80%;
-        padding: 10px 20px;
-        margin: 24px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 16px;
-    }
-
-    .input-textarea {
-        width: 80%;
-        padding: 10px 20px;
-        margin: 15px;
-        height: 140px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 16px;
-    }
-
-    form button {
-        padding: 8px 24px;
-        font-family: poppins;
-        font-size: 20px;
-        color: whitesmoke;
-        opacity: .8;
-        margin: 20px;
-        cursor: pointer;
-        border: none;
-        border-radius: 8px;
-        transition: all .4s ease;
-    }
-
-    form button:hover {
-        opacity: 1;
     }
 
     .contact-info-header {
@@ -2618,16 +2320,16 @@ for tabs and large phones
     }
 
     .about-img img {
-        width: 100%;
-        height: 450px;
+        width: 500px;
+        height: 500px;
         padding: 30px;
         border-radius: 40px;
         animation: opacity 1.4s ease;
     }
 
     .about-img {
-        width: 40%;
-        height: 450px;
+        width: 500px;
+        height: 500px;
         padding: 30px;
         border-radius: 40px;
     }
@@ -2655,10 +2357,10 @@ for tabs and large phones
     }
 
     .cv a button {
-        background: transparent;
         border: none;
         padding: 25px 35px;
         color: whitesmoke;
+        background: #c70039;
         outline: none;
         font-size: 30px;
         font-family: aileron;
@@ -2843,92 +2545,5 @@ for tabs and large phones
         background: #101010;
         opacity: .7;
         pointer-events: none;
-    }
-
-    .contact-form {
-        height: 600px;
-        width: 60%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        width: auto;
-        align-items: center;
-        position: relative;
-    }
-
-    .input-line {
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .input-name {
-        width: 60%;
-        padding: 10px 20px;
-        margin: 14px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 18px;
-    }
-
-    .form-header {
-        font-size: 24px;
-        font-family: poppins;
-        font-weight: 400;
-        color: whitesmoke;
-        padding: 20px;
-        padding-top: 0px;
-    }
-
-    .input-subject {
-        width: 60%;
-        padding: 10px 20px;
-        margin: 24px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 18px;
-    }
-
-    .input-textarea {
-        width: 60%;
-        padding: 10px 20px;
-        margin: 15px;
-        height: 150px;
-        border-radius: 8px;
-        outline: none;
-        background: #050505;
-        border: none;
-        color: whitesmoke;
-        font-family: poppins;
-        font-size: 18px;
-    }
-
-    form button {
-        padding: 8px 24px;
-        font-family: poppins;
-        font-size: 20px;
-        color: whitesmoke;
-        opacity: .8;
-        margin: 20px;
-        cursor: pointer;
-        border: none;
-        border-radius: 8px;
-        transition: all .4s ease;
     }
 }
