@@ -383,8 +383,8 @@
     }
 
     .contact-info {
-        width: 90%;
-        height: 500px;
+        width: 100%;
+        height: auto;
         align-items: center;
         background-position: center;
         background-size: cover;
