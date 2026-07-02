@@ -3,176 +3,155 @@
  * Powered by Three.js (WebGL)
  * 
  * Recreates the premium interactive particle waves from antigravity.google.
+ * Inspired by Hinarosha's BreathDearMedusae implementation.
  */
 
 (function () {
-    // 1. Poisson Disk Sampling implementation for uniform, organic particle layout
-    function poissonDiskSampling(width, height, minDistance, maxTries = 25) {
-        const cellSize = minDistance / Math.sqrt(2);
-        const gridWidth = Math.ceil(width / cellSize);
-        const gridHeight = Math.ceil(height / cellSize);
-        const grid = new Array(gridWidth * gridHeight).fill(null);
-        
-        const points = [];
-        const active = [];
-        
-        function insertPoint(p) {
-            points.push(p);
-            active.push(p);
-            const col = Math.floor(p[0] / cellSize);
-            const row = Math.floor(p[1] / cellSize);
-            grid[col + row * gridWidth] = p;
-        }
-        
-        // Start with a point in the center
-        insertPoint([width / 2, height / 2]);
-        
-        while (active.length > 0) {
-            const randIdx = Math.floor(Math.random() * active.length);
-            const p = active[randIdx];
-            let found = false;
-            
-            for (let i = 0; i < maxTries; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const dist = minDistance + Math.random() * minDistance;
-                const newX = p[0] + Math.cos(angle) * dist;
-                const newY = p[1] + Math.sin(angle) * dist;
-                
-                if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
-                    const col = Math.floor(newX / cellSize);
-                    const row = Math.floor(newY / cellSize);
-                    
-                    let tooClose = false;
-                    for (let r = Math.max(0, row - 2); r <= Math.min(gridHeight - 1, row + 2); r++) {
-                        for (let c = Math.max(0, col - 2); c <= Math.min(gridWidth - 1, col + 2); c++) {
-                            const neighbor = grid[c + r * gridWidth];
-                            if (neighbor) {
-                                const dx = neighbor[0] - newX;
-                                const dy = neighbor[1] - newY;
-                                if (dx * dx + dy * dy < minDistance * minDistance) {
-                                    tooClose = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (tooClose) break;
-                    }
-                    
-                    if (!tooClose) {
-                        insertPoint([newX, newY]);
-                        found = true;
-                        break;
-                    }
-                }
-            }
-            
-            if (!found) {
-                active.splice(randIdx, 1);
-            }
-        }
-        
-        return points;
-    }
+    let container, scene, camera, renderer, instancedMesh;
+    const countX = 100;
+    const countY = 55;
+    const count = countX * countY;
 
-    // 2. Main Application Setup
-    let container, scene, camera, renderer, particleGeometry, particleMaterial, particleSystem;
-    const mouse = new THREE.Vector2(0, 0);
-    const smoothMouse = new THREE.Vector2(0, 0);
-    const planeZ = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-    const raycaster = new THREE.Raycaster();
-    const ndcMouse = new THREE.Vector2();
+    const mouseTarget = new THREE.Vector2(0, 0);
+    const mouseCurrent = new THREE.Vector2(0, 0);
     let mouseActive = 0.0;
     let mouseActiveTarget = 0.0;
     let clock = new THREE.Clock();
 
-    // Custom Shader Definitions
+    // Shaders for Instanced Mesh
     const vertexShader = `
         uniform float uTime;
         uniform vec2 uMouse;
         uniform float uMouseActive;
         
-        attribute float aSize;
-        attribute vec3 aRandoms;
+        varying vec2 vUv;
+        varying float vSize;
+        varying vec2 vPos;
         
-        varying vec3 vColor;
-        varying float vDisplacement;
+        attribute vec3 aOffset; 
+        attribute float aRandom;
         
+        #define PI 3.14159265359
+
+        // 2D Value Noise for organic halo shape
+        float hash(vec2 p) {
+            return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+        }
+        
+        float noise(vec2 p) {
+            vec2 i = floor(p);
+            vec2 f = fract(p);
+            f = f * f * (3.0 - 2.0 * f);
+            
+            float a = hash(i);
+            float b = hash(i + vec2(1.0, 0.0));
+            float c = hash(i + vec2(0.0, 1.0));
+            float d = hash(i + vec2(1.0, 1.0));
+            
+            return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+        }
+
+        mat2 rotate2d(float _angle){
+            return mat2(cos(_angle), sin(_angle),
+                        -sin(_angle), cos(_angle));
+        }
+
         void main() {
-            vec3 pos = position;
+            vUv = uv;
+            vec3 pos = aOffset;
             
-            // 1. Idle breathing floating animation
-            float floatSpeed = 0.4 + aRandoms.z * 0.4;
-            float floatAmplitude = 1.0 + aRandoms.x * 2.0;
-            pos.x += sin(uTime * floatSpeed + aRandoms.y * 10.0) * floatAmplitude * 0.15;
-            pos.y += cos(uTime * floatSpeed + aRandoms.x * 10.0) * floatAmplitude * 0.15;
-            pos.z += sin(uTime * floatSpeed * 0.8 + (aRandoms.x + aRandoms.y) * 5.0) * floatAmplitude * 0.6;
+            // --- 1. ALIVE FLOW (Base layer) ---
+            float driftSpeed = uTime * 0.15;
+            float dx = sin(driftSpeed + pos.y * 0.5) + sin(driftSpeed * 0.5 + pos.y * 2.0);
+            float dy = cos(driftSpeed + pos.x * 0.5) + cos(driftSpeed * 0.5 + pos.x * 2.0);
             
-            // 2. Wave deformation based on 2D distance to mouse
-            float dist = distance(pos.xy, uMouse);
+            pos.x += dx * 0.25; 
+            pos.y += dy * 0.25;
+
+            // --- 2. THE JELLYFISH HALO (Smooth & Subtle) ---
+            vec2 relToMouse = pos.xy - uMouse;
+            float distFromMouse = length(relToMouse);
+            float angleToMouse = atan(relToMouse.y, relToMouse.x);
             
-            float waveRadius = 38.0;
-            float waveWidth = 28.0;
-            float maxDisplacement = 24.0;
+            // Organic Halo Shape evolving slowly over time
+            float shapeFactor = noise(vec2(angleToMouse * 2.0, uTime * 0.1));
             
-            float ripple = 0.0;
-            if (dist < waveRadius + waveWidth) {
-                float normDist = (dist - waveRadius) / waveWidth;
-                ripple = exp(-pow(normDist * 2.2, 2.0));
-            }
+            // Breathing cycle: slow expansion/contraction of the Halo Radius
+            float breathCycle = sin(uTime * 0.8);
             
-            float displacement = ripple * maxDisplacement * uMouseActive;
-            pos.z += displacement;
+            // Radius breathes: 2.2 +/- 0.3 plus shape noise
+            float currentRadius = 2.2 + breathCycle * 0.3 + (shapeFactor * 0.5);
             
-            // 3. Outward push away from the cursor (repulsion)
-            if (dist > 0.1 && dist < waveRadius + waveWidth) {
-                vec2 dir = normalize(pos.xy - uMouse);
-                float push = ripple * 7.0 * uMouseActive;
-                pos.xy += dir * push;
-            }
+            // Interaction Ring Influence
+            float rimWidth = 1.8;
+            float rimInfluence = smoothstep(rimWidth, 0.0, abs(distFromMouse - currentRadius));
             
-            vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-            gl_Position = projectionMatrix * mvPosition;
+            // --- 3. WAVE MOVEMENT (Gentle Ripple) ---
+            vec2 pushDir = normalize(relToMouse + vec2(0.0001, 0.0));
+            float pushAmt = (breathCycle * 0.5 + 0.5) * 0.5; // 0 to 0.5
             
-            // Size attenuation (gets larger closer to camera)
-            gl_PointSize = aSize * (350.0 / -mvPosition.z);
+            // Apply push near the ring, scaled by uMouseActive
+            pos.xy += pushDir * pushAmt * rimInfluence * uMouseActive;
+            pos.z += rimInfluence * 0.3 * sin(uTime) * uMouseActive;
+
+            // --- 4. SIZE & SCALE ---
+            float baseSize = 0.012 + (sin(uTime + pos.x) * 0.003);
+            float activeSize = 0.055; 
+            float currentScale = baseSize + (rimInfluence * activeSize * uMouseActive);
+            float stretch = rimInfluence * 0.02 * uMouseActive;
             
-            // 4. Color states (mix grey-white with neon gradients during interaction)
-            vec3 baseColor = vec3(0.40, 0.41, 0.45);
+            vec3 transformed = position;
+            transformed.x *= (currentScale + stretch);
+            transformed.y *= currentScale * 0.85; 
             
-            // Antigravity active color palette (interpolated red-blue gradient)
-            vec3 activeColorRed = vec3(0.98, 0.27, 0.25);  // #FF4641
-            vec3 activeColorBlue = vec3(0.20, 0.42, 0.95); // #346BF1
+            vSize = rimInfluence * uMouseActive;
+            vPos = pos.xy;
             
-            // Mix active colors based on X position to create a beautiful gradient sweep
-            vec3 activeColor = mix(activeColorRed, activeColorBlue, sin(position.x * 0.012) * 0.5 + 0.5);
+            // --- 5. ROTATION (Directed towards mouse / Radial) ---
+            float targetAngle = angleToMouse; 
+            transformed.xy = rotate2d(targetAngle) * transformed.xy;
             
-            // Interpolate colors based on displacement amount
-            float colorFactor = clamp((displacement - 0.5) / 14.0, 0.0, 1.0);
-            vColor = mix(baseColor, activeColor, colorFactor);
-            vDisplacement = displacement;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos + transformed, 1.0);
         }
     `;
 
     const fragmentShader = `
-        varying vec3 vColor;
-        varying float vDisplacement;
-        
+        uniform float uTime;
+        varying vec2 vUv;
+        varying float vSize;
+        varying vec2 vPos;
+
         void main() {
-            // Cut off square coordinates to render round dots
-            vec2 coord = gl_PointCoord - vec2(0.5);
-            float dist = length(coord);
+            // Shape: "Rectangle with rounded corners"
+            vec2 center = vec2(0.5);
+            vec2 pos = abs(vUv - center) * 2.0; 
             
-            if (dist > 0.5) {
-                discard;
-            }
+            float d = pow(pow(pos.x, 2.6) + pow(pos.y, 2.6), 1.0 / 2.6);
+            float alpha = 1.0 - smoothstep(0.8, 1.0, d);
             
-            // Anti-aliasing for clean point borders
-            float alpha = smoothstep(0.5, 0.43, dist);
+            if (alpha < 0.01) discard;
+
+            // Google/Antigravity Brand Colors
+            vec3 cBlue = vec3(0.26, 0.52, 0.96);    // #4285F4
+            vec3 cRed = vec3(0.92, 0.26, 0.21);     // #EA4335
+            vec3 cYellow = vec3(0.98, 0.73, 0.01);  // #FBBC05
             
-            // Dynamic neon glow factor for high waves
-            float glow = 1.0 + clamp(vDisplacement * 0.05, 0.0, 1.2);
+            // Dynamic Color Shifting based on position and time
+            float t = uTime * 1.2;
+            float p1 = sin(vPos.x * 0.8 + t);
+            float p2 = sin(vPos.y * 0.8 + t * 0.8 + p1);
             
-            gl_FragColor = vec4(vColor * glow, alpha * 0.75);
+            vec3 activeColor = mix(cBlue, cRed, p1 * 0.5 + 0.5);
+            activeColor = mix(activeColor, cYellow, p2 * 0.5 + 0.5);
+            
+            vec3 finalColor = activeColor;
+            
+            // Fade alpha to 0 when far from cursor (vSize goes to 0)
+            float finalAlpha = alpha * mix(0.0, 0.95, vSize);
+
+            if (finalAlpha < 0.01) discard;
+
+            gl_FragColor = vec4(finalColor, finalAlpha);
         }
     `;
 
@@ -186,11 +165,11 @@
         // Setup Scene & Renderer
         scene = new THREE.Scene();
         
-        // Setup Camera: positioned at Z = 120, looking at (0, 0, 0)
+        // Setup Camera: placed at Z = 15, matching React Three Fiber setup
         const width = container.clientWidth;
         const height = container.clientHeight;
-        camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 1000);
-        camera.position.z = 125;
+        camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+        camera.position.z = 15;
 
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -198,50 +177,47 @@
         renderer.setClearColor(0x000000, 0); // Transparent background
         container.appendChild(renderer.domElement);
 
-        // Generate Particles using Poisson Disk Sampling
-        // Using a coordinate grid from -220 to 220 on X, and -150 to 150 on Y to fully cover typical viewports
-        const gridW = 440;
-        const gridH = 300;
-        const rawPoints = poissonDiskSampling(gridW, gridH, 5.8);
-        
-        const count = rawPoints.length;
-        const positions = new Float32Array(count * 3);
-        const colors = new Float32Array(count * 3);
-        const sizes = new Float32Array(count);
-        const randoms = new Float32Array(count * 3); // random offsets and speeds
+        // Setup Instanced Mesh
+        // Using a Plane Geometry for the stretched pills
+        const geometry = new THREE.PlaneGeometry(1, 1);
 
-        // Offset center to (0,0) and populate attributes
-        for (let i = 0; i < count; i++) {
-            const px = rawPoints[i][0] - gridW / 2;
-            const py = rawPoints[i][1] - gridH / 2;
-            const pz = 0;
+        // Populate instanced attributes
+        const offsets = new Float32Array(count * 3);
+        const randoms = new Float32Array(count);
 
-            positions[i * 3 + 0] = px;
-            positions[i * 3 + 1] = py;
-            positions[i * 3 + 2] = pz;
+        // Grid boundaries (covers Z=15 viewport perfectly with some overflow)
+        const gridWidth = 40;
+        const gridHeight = 22;
+        const jitter = 0.25;
 
-            // Default base point color (subtle grey)
-            colors[i * 3 + 0] = 0.40;
-            colors[i * 3 + 1] = 0.41;
-            colors[i * 3 + 2] = 0.45;
+        let i = 0;
+        for (let y = 0; y < countY; y++) {
+            for (let x = 0; x < countX; x++) {
+                const u = x / (countX - 1);
+                const v = y / (countY - 1);
 
-            // Point size (randomized slightly for texture richness)
-            sizes[i] = 1.0 + Math.random() * 1.8;
+                // Grid positions centered around (0,0)
+                let px = (u - 0.5) * gridWidth;
+                let py = (v - 0.5) * gridHeight;
 
-            // Random attributes for individual breathing animations
-            randoms[i * 3 + 0] = Math.random(); // amplitude factor
-            randoms[i * 3 + 1] = Math.random(); // phase offset
-            randoms[i * 3 + 2] = Math.random(); // speed multiplier
+                // Add grid jitter/noise
+                px += (Math.random() - 0.5) * jitter;
+                py += (Math.random() - 0.5) * jitter;
+
+                offsets[i * 3 + 0] = px;
+                offsets[i * 3 + 1] = py;
+                offsets[i * 3 + 2] = 0;
+
+                randoms[i] = Math.random();
+                i++;
+            }
         }
 
-        particleGeometry = new THREE.BufferGeometry();
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        particleGeometry.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
-        particleGeometry.setAttribute('aRandoms', new THREE.BufferAttribute(randoms, 3));
+        geometry.setAttribute('aOffset', new THREE.InstancedBufferAttribute(offsets, 3));
+        geometry.setAttribute('aRandom', new THREE.InstancedBufferAttribute(randoms, 1));
 
         // Create Custom Shader Material
-        particleMaterial = new THREE.ShaderMaterial({
+        const material = new THREE.ShaderMaterial({
             uniforms: {
                 uTime: { value: 0 },
                 uMouse: { value: new THREE.Vector2(0, 0) },
@@ -254,8 +230,8 @@
             blending: THREE.NormalBlending
         });
 
-        particleSystem = new THREE.Points(particleGeometry, particleMaterial);
-        scene.add(particleSystem);
+        instancedMesh = new THREE.InstancedMesh(geometry, material, count);
+        scene.add(instancedMesh);
 
         // Bind Events
         window.addEventListener('mousemove', onMouseMove);
@@ -272,16 +248,16 @@
 
         // Calculate Normalized Device Coordinates (NDC)
         const rect = container.getBoundingClientRect();
-        ndcMouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-        ndcMouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+        const ndcX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        const ndcY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
-        // Project mouse on Z = 0 Plane using Raycaster
-        raycaster.setFromCamera(ndcMouse, camera);
-        const intersect = new THREE.Vector3();
-        raycaster.ray.intersectPlane(planeZ, intersect);
+        // Directly project mouse coords to Z=0 plane using viewport size
+        const vFOV = (camera.fov * Math.PI) / 180;
+        const viewportHeight = 2 * Math.tan(vFOV / 2) * camera.position.z;
+        const viewportWidth = viewportHeight * (window.innerWidth / window.innerHeight);
 
-        mouse.x = intersect.x;
-        mouse.y = intersect.y;
+        mouseTarget.x = (ndcX * viewportWidth) / 2;
+        mouseTarget.y = (ndcY * viewportHeight) / 2;
         mouseActiveTarget = 1.0;
     }
 
@@ -309,22 +285,22 @@
     function animate() {
         requestAnimationFrame(animate);
 
-        if (!renderer || !scene || !camera || !particleMaterial) return;
+        if (!renderer || !scene || !camera || !instancedMesh) return;
 
-        const delta = clock.getDelta();
         const time = clock.getElapsedTime();
 
         // Pass elapsed time to Shader
-        particleMaterial.uniforms.uTime.value = time;
+        instancedMesh.material.uniforms.uTime.value = time;
 
         // Smoothly ease/interpolate mouse position (lag trailing wave effect)
-        smoothMouse.x += (mouse.x - smoothMouse.x) * 0.07;
-        smoothMouse.y += (mouse.y - smoothMouse.y) * 0.07;
-        particleMaterial.uniforms.uMouse.value.copy(smoothMouse);
+        const current = instancedMesh.material.uniforms.uMouse.value;
+        const dragFactor = 0.055; // Matches BreathDearMedusae drag
+        current.x += (mouseTarget.x - current.x) * dragFactor;
+        current.y += (mouseTarget.y - current.y) * dragFactor;
 
         // Smoothly fade mouse activation (prevent hard transitions)
         mouseActive += (mouseActiveTarget - mouseActive) * 0.05;
-        particleMaterial.uniforms.uMouseActive.value = mouseActive;
+        instancedMesh.material.uniforms.uMouseActive.value = mouseActive;
 
         renderer.render(scene, camera);
     }
