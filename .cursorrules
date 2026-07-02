@@ -1,0 +1,80 @@
+# Regras e Diretrizes para o Agente de IA (.cursorrules)
+# Wagner Barbosa - Portfólio Pessoal
+
+Este arquivo serve como guia de contexto e regras de codificação para que assistentes de inteligência artificial possam ler, modificar e estender esta base de código de forma consistente e com qualidade profissional.
+
+## 🚀 Contexto do Projeto
+* **Dono**: Wagner Barbosa (Engenheiro de Computação, Tech Lead Backend .NET, especialista em Segurança da Informação e Big Data).
+* **Objetivo**: Portfólio estático profissional e rápido de exibição de conquistas, competências e informações de contato.
+* **Hospedagem**: Projetado para ser hospedado no GitHub Pages (com suporte a domínio próprio `engwagner.com.br` via arquivo `CNAME`).
+
+## 🛠️ Stack Tecnológica
+1. **Estrutura**: HTML5 Semântico.
+2. **Estilização**: CSS3 Vanilla (sem frameworks utilitários).
+3. **Comportamento & Animações**:
+   * JavaScript Nativo (Vanilla JS - **jQuery é estritamente proibido**).
+   * GSAP (GreenSock Animation Platform) v3 para animações e transições.
+   * Particles.js para o fundo animado de partículas do header.
+
+## 📂 Organização de Diretórios
+* `/index.html` - Ponto de entrada e única página estrutural.
+* `/CNAME` - Configuração de DNS do domínio personalizado.
+* `/css/` - Estilos separados por responsividade e temas de cores.
+  * `index.css` - Estilos globais e componentes.
+  * `color-red.css` - Mapa de cores do tema vermelho (`#c70039`).
+  * `media_max550px.css` - Media queries para smartphones.
+  * `media_551px_1025px.css` - Media queries para tablets.
+  * `media_1441px_9000px.css` - Media queries para telas ultra-wide.
+* `/js/` - Scripts de comportamento.
+  * `index.js` - Transições, carregador, menu mobile, cursor customizado e efeito de digitação.
+  * `particles.min.js` - Biblioteca minificada de partículas.
+* `/images/` - Fotos do perfil, ícones sociais e logotipos.
+* `/data/` - Downloads do usuário (ex: Currículo em PDF).
+
+## 🎨 Sistema de Design & Variáveis
+* **Cor de Destaque (Accent)**: `#c70039` (Vermelho Crimson / Cereja).
+* **Fundo (Background)**: Dark Mode (`#171717` e `#101010` para áreas mais escuras).
+* **Tipografia**:
+  * Títulos: `'Poppins', sans-serif`
+  * Textos/Geral: `'Raleway', sans-serif`
+  * Marca do Topo: `'Monoton', sans-serif`
+
+---
+
+## 🤖 Diretrizes para Desenvolvimento com IA (AI-First)
+
+### 1. Adicionando ou Editando Habilidades (Skills)
+As barras de habilidade utilizam uma estrutura semântica combinando classes do HTML e do CSS:
+* No HTML (`/index.html`):
+  ```html
+  <div class="skill-html skill">
+      <div class="skill-text"><div class="html">Nome da Tech</div></div>
+      <div class="prog">
+          <div class="progress-bar [tech]-bar">Porcentagem%</div>
+      </div>
+  </div>
+  ```
+* No CSS (`/css/index.css`):
+  Você deve declarar a classe de largura específica da tecnologia:
+  ```css
+  .[tech]-bar { width: Porcentagem%; }
+  ```
+  *(Nota: Nunca use classes genéricas ou arbitrárias como `adobe-progress` ou `php-progress` para tecnologias não relacionadas).*
+
+### 2. Adicionando Novas Seções (Single Page Navigation)
+O site funciona como um aplicativo de página única (SPA) por meio de transições de slide animadas pelo GSAP.
+Se precisar adicionar uma nova seção:
+1. Crie um elemento `<section id="id_da_secao">` dentro da tag `<main>` no `index.html`.
+2. Adicione a classe e estilos de exibição no `css/index.css` (deixe com `display: none` por padrão).
+3. No arquivo `js/index.js`, inclua a nova seção no array `sections` dentro da função `transitionToSection`.
+4. Vincule um botão de navegação chamando `transitionToSection('#id_da_secao')`.
+
+### 3. Acessibilidade (a11y) & SEO
+* **Imagens**: Sempre inclua o atributo `alt` descritivo.
+* **Links Externos**: Sempre utilize `target="_blank"` acompanhado de `rel="noopener noreferrer"` por segurança e otimização de thread.
+* **Hierarquia**: Mantenha apenas uma tag `<h1>` na página inicial (reservada para o nome Wagner Barbosa) e utilize `<h2>` e `<h3>` ordenadamente para títulos de seções e subtítulos.
+* **Navegação**: Elementos interativos como menus e botões de fechar devem ser `<button>` e ter etiquetas `aria-label` descritivas.
+
+### 4. Performance e Limpeza
+* Evite adicionar novas dependências externas. Dê preferência para código Vanilla JS puro e APIs modernas do navegador.
+* Não use `@import` no CSS. Qualquer folha de estilo ou fonte externa deve ser carregada no `<head>` do HTML.

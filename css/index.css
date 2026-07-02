@@ -3,15 +3,21 @@
   * Description: Personal Portfolio Website Template
   * Author/Developer: Sujal
   * Version: v1
+  * Refactored & Optimized by Antigravity (AI)
   */
-@import url('https://fonts.googleapis.com/css?family=Raleway:300&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Monoton&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Poppins:500&display=swap');
 
 * {
     padding: 0%;
     margin: 0%;
     box-sizing: border-box;
+}
+
+button.menubar, button.navigation-close {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
 }
 
 ::-webkit-scrollbar {
@@ -795,7 +801,7 @@ body {
     overflow: hidden;
 }
 
-.html-progress {
+.progress-bar {
     position: absolute;
     top: 10%;
     left: 1%;
@@ -804,81 +810,19 @@ body {
     align-items: center;
     justify-content: center;
     transition: all .4s ease;
-    width: 95%;
     border-radius: 10px;
     background: #c70039;
+    font-family: 'Poppins', sans-serif;
+    color: whitesmoke;
+    font-size: 14px;
 }
 
-.js-progress {
-    position: absolute;
-    top: 10%;
-    left: 1%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    font-family: poppins;
-    justify-content: center;
-    transition: all .4s ease;
-    width: 90%;
-    border-radius: 10px;
-    background: #c70039;
-}
-
-.adobe-progress {
-    position: absolute;
-    top: 10%;
-    left: 1%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all .4s ease;
-    width: 83%;
-    border-radius: 10px;
-    background: #c70039;
-}
-
-.php-progress {
-    position: absolute;
-    top: 10%;
-    left: 1%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 85%;
-    border-radius: 10px;
-    background: #c70039;
-    transition: all .4s ease;
-}
-
-.jquery-progress {
-    position: absolute;
-    top: 10%;
-    left: 1%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all .4s ease;
-    width: 94%;
-    border-radius: 10px;
-    background: #c70039;
-}
-
-.seo-progress {
-    position: absolute;
-    top: 10%;
-    left: 1%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 84%;
-    border-radius: 10px;
-    transition: all .4s ease;
-    background: #c70039;
-}
+.csharp-bar { width: 85%; }
+.mongodb-bar { width: 75%; }
+.sqlserver-bar { width: 50%; }
+.javascript-bar { width: 45%; }
+.aws-bar { width: 20%; }
+.git-bar { width: 84%; }
 
 .portfolio-header {
     height: auto;
@@ -1279,7 +1223,7 @@ button:hover .index {
     font-family: poppins;
 }
 
-.contact-info-icon-text h6 {
+.contact-info-icon-text h3 {
     font-size: 15px;
     opacity: .8;
 }
