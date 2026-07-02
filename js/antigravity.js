@@ -8,8 +8,8 @@
 
 (function () {
     let container, scene, camera, renderer, instancedMesh;
-    const countX = 100;
-    const countY = 55;
+    const countX = 85;
+    const countY = 48;
     const count = countX * countY;
 
     const mouseTarget = new THREE.Vector2(0, 0);
@@ -65,8 +65,8 @@
             float dx = sin(driftSpeed + pos.y * 0.5) + sin(driftSpeed * 0.5 + pos.y * 2.0);
             float dy = cos(driftSpeed + pos.x * 0.5) + cos(driftSpeed * 0.5 + pos.x * 2.0);
             
-            pos.x += dx * 0.25; 
-            pos.y += dy * 0.25;
+            pos.x += dx * 0.15; 
+            pos.y += dy * 0.15;
 
             // --- 2. THE JELLYFISH HALO (Smooth & Subtle) ---
             vec2 relToMouse = pos.xy - uMouse;
@@ -79,30 +79,32 @@
             // Breathing cycle: slow expansion/contraction of the Halo Radius
             float breathCycle = sin(uTime * 0.8);
             
-            // Radius breathes: 2.2 +/- 0.3 plus shape noise
-            float currentRadius = 2.2 + breathCycle * 0.3 + (shapeFactor * 0.5);
+            // Radius breathes
+            float currentRadius = 2.4 + breathCycle * 0.2 + (shapeFactor * 0.4);
             
-            // Interaction Ring Influence
-            float rimWidth = 1.8;
+            // Interaction Ring Influence (wider ring but still keeping center empty)
+            float rimWidth = 1.6;
             float rimInfluence = smoothstep(rimWidth, 0.0, abs(distFromMouse - currentRadius));
             
             // --- 3. WAVE MOVEMENT (Gentle Ripple) ---
             vec2 pushDir = normalize(relToMouse + vec2(0.0001, 0.0));
-            float pushAmt = (breathCycle * 0.5 + 0.5) * 0.5; // 0 to 0.5
+            float pushAmt = (breathCycle * 0.5 + 0.5) * 0.3; // 0 to 0.3
             
             // Apply push near the ring, scaled by uMouseActive
             pos.xy += pushDir * pushAmt * rimInfluence * uMouseActive;
-            pos.z += rimInfluence * 0.3 * sin(uTime) * uMouseActive;
+            pos.z += rimInfluence * 0.2 * sin(uTime) * uMouseActive;
 
-            // --- 4. SIZE & SCALE ---
-            float baseSize = 0.012 + (sin(uTime + pos.x) * 0.003);
-            float activeSize = 0.055; 
+            // --- 4. SIZE & SCALE (Balanced) ---
+            float baseSize = 0.015; // Slightly larger base so they don't disappear entirely
+            float activeSize = 0.040; // Allow them to grow enough to be clearly seen
             float currentScale = baseSize + (rimInfluence * activeSize * uMouseActive);
-            float stretch = rimInfluence * 0.02 * uMouseActive;
+            
+            // Stretch along the X axis (pointing towards mouse)
+            float stretch = rimInfluence * 0.08 * uMouseActive;
             
             vec3 transformed = position;
-            transformed.x *= (currentScale + stretch);
-            transformed.y *= currentScale * 0.85; 
+            transformed.x *= (currentScale + stretch); // Length of the dash
+            transformed.y *= currentScale * 0.6; // Thickness of the dash
             
             vSize = rimInfluence * uMouseActive;
             vPos = pos.xy;
@@ -127,27 +129,28 @@
             vec2 pos = abs(vUv - center) * 2.0; 
             
             float d = pow(pow(pos.x, 2.6) + pow(pos.y, 2.6), 1.0 / 2.6);
-            float alpha = 1.0 - smoothstep(0.8, 1.0, d);
+            float alpha = 1.0 - smoothstep(0.7, 1.0, d);
             
             if (alpha < 0.01) discard;
 
-            // Google/Antigravity Brand Colors
-            vec3 cBlue = vec3(0.26, 0.52, 0.96);    // #4285F4
-            vec3 cRed = vec3(0.92, 0.26, 0.21);     // #EA4335
-            vec3 cYellow = vec3(0.98, 0.73, 0.01);  // #FBBC05
+            // Subtle but bright Light Blue Colors
+            vec3 cBlue1 = vec3(0.5, 0.75, 1.0);   // Bright soft blue
+            vec3 cBlue2 = vec3(0.3, 0.6, 1.0);    // Bright medium blue
+            vec3 cWhite = vec3(0.9, 0.95, 1.0);   // Bright tinted white
             
             // Dynamic Color Shifting based on position and time
-            float t = uTime * 1.2;
+            float t = uTime * 0.8;
             float p1 = sin(vPos.x * 0.8 + t);
             float p2 = sin(vPos.y * 0.8 + t * 0.8 + p1);
             
-            vec3 activeColor = mix(cBlue, cRed, p1 * 0.5 + 0.5);
-            activeColor = mix(activeColor, cYellow, p2 * 0.5 + 0.5);
+            vec3 activeColor = mix(cBlue1, cBlue2, p1 * 0.5 + 0.5);
+            activeColor = mix(activeColor, cWhite, p2 * 0.5 + 0.5);
             
             vec3 finalColor = activeColor;
             
             // Fade alpha to 0 when far from cursor (vSize goes to 0)
-            float finalAlpha = alpha * mix(0.0, 0.95, vSize);
+            // Restore maximum alpha back to 1.0 so the particles are vividly glowing
+            float finalAlpha = alpha * mix(0.0, 1.0, vSize);
 
             if (finalAlpha < 0.01) discard;
 
