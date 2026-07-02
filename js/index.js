@@ -101,28 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Smooth Cursor Follower (Lag-free GSAP implementation)
-    const cursor = document.querySelector('.cursor');
-    if (cursor) {
-        window.addEventListener('mousemove', function (e) {
-            gsap.to(cursor, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1,
-                ease: "power2.out"
-            });
-        });
 
-        const interactiveElements = document.querySelectorAll('a, button, .menubar, .navigation-close');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', function () {
-                gsap.to(cursor, { scale: 1.4, opacity: 1 });
-            });
-            el.addEventListener('mouseleave', function () {
-                gsap.to(cursor, { scale: 1, opacity: 0.6 });
-            });
-        });
-    }
 });
 
 // Text Rotating (Typewriter effect) Constructor
