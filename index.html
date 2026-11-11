@@ -663,7 +663,7 @@
         </label>
         <div class="verify">
           <div class="turnstile-box" id="turnstile-box"></div>
-          <p class="fine"><svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg><span>Verificação anti-robô feita pela Cloudflare (Turnstile).</span></p>
+          <p class="fine"><svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg><span>Verificação anti-robô feita pela Cloudflare (Turnstile). Por segurança, alguns acessos podem ser recusados automaticamente.</span></p>
         </div>
         <p class="zone-error" id="zone-error" role="alert" hidden></p>
       </div>
@@ -693,6 +693,19 @@
         <button class="btn btn-ghost btn-sm" type="button" id="zone-exit">
           <svg class="i i-sm" aria-hidden="true"><use href="#i-log-out"/></svg><span>Sair da zona segura</span>
         </button>
+      </div>
+    </div>
+    <!-- Painel 3: acesso recusado — sem dizer o motivo (revelar a regra ensinaria a contorná-la) -->
+    <div data-pane="blocked" hidden>
+      <div class="zone-head tone-indigo">
+        <span class="card-glow" aria-hidden="true"></span>
+        <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg></span>
+        <h2 id="zone-blocked-title">Acesso indisponível no momento</h2>
+        <p>Foram identificados sinais de risco nesta conexão e, por segurança, a zona segura não pode ser aberta agora. Tente mais tarde ou a partir de outra rede.</p>
+        <button class="icon-btn zone-close" type="button" data-zone-close aria-label="Fechar"><svg class="i i-sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
+      <div class="zone-foot zone-foot-solo">
+        <button class="btn btn-ghost btn-sm" type="button" data-zone-close>Fechar</button>
       </div>
     </div>
   </dialog>

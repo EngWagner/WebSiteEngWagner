@@ -561,6 +561,7 @@ dialog.zone[open] { animation: pop .28s var(--ease); }
 
 .zone-foot { padding: 0 26px 24px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; align-items: center; }
 .zone-foot .fine { margin-right: auto; }
+.zone-foot-solo { padding-top: 20px; }
 .btn[disabled] { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
 .fine { font-size: .78rem; color: var(--text-faint); line-height: 1.5; }
 

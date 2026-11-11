@@ -9,9 +9,14 @@
  * Contrato com o Worker:
  *   POST {endpoint}/unlock   corpo { token, consent: true, terms: "v1", lang }
  *     200 → { session, expiresAt, record: { at, ip, country, ua, terms }, content }
- *     400/403 → verificação recusada · 429 → muitas tentativas
+ *     400/403 → verificação recusada · 403 { error: "blocked" } → acesso recusado
+ *     429 → muitas tentativas
  *   GET  {endpoint}/cv?lang=pt|en   cabeçalho Authorization: Bearer {session}
  *     200 → o PDF · 401 → sessão vencida
+ *   GET  {endpoint}/status   → { available } — consultado antes de mostrar o termo
+ *
+ * Acesso recusado (por exemplo, fora dos países permitidos no Worker): o
+ * visitante vê só um aviso genérico de "sinais de risco", sem o motivo.
  *
  *   content = {
  *     phone: "+55 ...", whatsapp: "55...", email: "...",
@@ -157,7 +162,7 @@
 
   // ---------- Slots ----------
   var slots = {};
-  var dialog, paneConsent, paneSession, consentBox, enterBtn, errorEl, timerEl, zoneBtn, classLine;
+  var dialog, paneConsent, paneSession, paneBlocked, consentBox, enterBtn, errorEl, timerEl, zoneBtn, classLine;
   var timerId = null;
 
   function capture() {
@@ -270,10 +275,30 @@
   function hideError() { errorEl.hidden = true; errorEl.textContent = ''; }
   function updateEnter() { if (enterBtn) enterBtn.disabled = !(consentBox.checked && turnstileToken); }
 
+  var TITLES = { consent: 'zone-title', session: 'zone-session-title', blocked: 'zone-blocked-title' };
+
   function showPane(name) {
     paneConsent.hidden = name !== 'consent';
     paneSession.hidden = name !== 'session';
-    dialog.setAttribute('aria-labelledby', name === 'session' ? 'zone-session-title' : 'zone-title');
+    if (paneBlocked) paneBlocked.hidden = name !== 'blocked';
+    dialog.setAttribute('aria-labelledby', TITLES[name] || 'zone-title');
+  }
+
+  /**
+   * Este acesso pode abrir a zona? Pergunta ao Worker uma vez por página.
+   * true/false, ou null se não deu para saber — aí segue o fluxo normal e o
+   * /unlock decide.
+   */
+  var availability = null;
+  function checkAvailability() {
+    if (!ENDPOINT) return Promise.resolve(null);
+    if (!availability) {
+      availability = fetch(ENDPOINT + '/status', { credentials: 'omit' })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) { return data && typeof data.available === 'boolean' ? data.available : null; })
+        .catch(function () { availability = null; return null; });
+    }
+    return availability;
   }
 
   function open() {
@@ -289,7 +314,12 @@
     }
     if (typeof dialog.showModal === 'function') { if (!dialog.open) dialog.showModal(); }
     else dialog.setAttribute('open', '');
-    if (!session) prepareWidget();
+    if (!session) {
+      checkAvailability().then(function (ok) {
+        if (ok === false) showPane('blocked');
+        else prepareWidget();
+      });
+    }
   }
 
   function close() {
@@ -310,8 +340,13 @@
       credentials: 'omit',
       body: JSON.stringify({ token: turnstileToken, consent: true, terms: TERMS, lang: T.lang })
     }).then(function (res) {
-      if (!res.ok) { var err = new Error('http'); err.status = res.status; throw err; }
-      return res.json();
+      if (res.ok) return res.json();
+      return res.json().catch(function () { return {}; }).then(function (body) {
+        var err = new Error('http');
+        err.status = res.status;
+        err.code = body && body.error;
+        throw err;
+      });
     }).then(function (data) {
       if (!data || !data.session || !data.content) throw new Error('payload');
       writeSession({
@@ -324,6 +359,7 @@
       render();
       if (window.UI) UI.toast(T('toast.unlocked'));
     }).catch(function (err) {
+      if (err.code === 'blocked') { showPane('blocked'); return; }
       showError(err.status === 429 ? T('zone.err.rate')
         : (err.status === 400 || err.status === 403) ? T('zone.err.verify')
         : T('zone.err.network'));
@@ -398,13 +434,17 @@
     nudgeEl = document.getElementById('zone-nudge');
     nudgeWrap = document.getElementById('zone-wrap');
     if (!nudgeEl || !nudgeWrap || !ENDPOINT || !SITEKEY) return;
-    var timer = setTimeout(showNudge, 5000);
+    // Só convida quem pode entrar: um acesso que seria recusado não vê a sugestão.
+    function maybeNudge() {
+      checkAvailability().then(function (ok) { if (ok !== false) showNudge(); });
+    }
+    var timer = setTimeout(maybeNudge, 5000);
     function onScroll() {
       var max = root.scrollHeight - window.innerHeight;
       if (max > 0 && window.scrollY / max >= 0.33) {
         window.removeEventListener('scroll', onScroll);
         clearTimeout(timer);
-        showNudge();
+        maybeNudge();
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -420,6 +460,7 @@
     if (!dialog) return;
     paneConsent = dialog.querySelector('[data-pane="consent"]');
     paneSession = dialog.querySelector('[data-pane="session"]');
+    paneBlocked = dialog.querySelector('[data-pane="blocked"]');
     consentBox = document.getElementById('zone-consent');
     enterBtn = document.getElementById('zone-enter');
     errorEl = document.getElementById('zone-error');
