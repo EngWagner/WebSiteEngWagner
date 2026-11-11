@@ -1,48 +1,82 @@
-# Wagner Barbosa | Portfólio Pessoal 🚀
+# Wagner Barbosa · site pessoal
 
-Este é o repositório do site pessoal e profissional de **Wagner Barbosa** (disponível em [engwagner.com.br](https://engwagner.com.br)), desenvolvido com foco em alta performance, acessibilidade (a11y), SEO otimizado e estrutura moderna e limpa.
+Código do [engwagner.com.br](https://engwagner.com.br) — trajetória, habilidades,
+projetos e interesses de Wagner Barbosa, em português (`/`) e inglês (`/en/`).
 
-O projeto foi totalmente refatorado sob o paradigma **AI-First**, contendo documentação e diretrizes estruturadas para facilitar futuras extensões por desenvolvedores e agentes de inteligência artificial.
+- **Tema escuro por padrão**, com opção de claro (a escolha fica salva no navegador).
+- **Malha de polígonos** animada no fundo (canvas 2D, sem bibliotecas).
+- **Zona segura**: o lado profissional é público; o pessoal (contato direto,
+  currículo, história) só abre depois de consentimento e verificação anti-robô,
+  servido por um Cloudflare Worker à parte.
 
----
+## Stack
 
-## 🛠️ Stack Tecnológica
+- HTML, CSS e JavaScript puros. **Sem etapa de build** e sem dependências: o
+  GitHub Pages serve os arquivos como estão (`.nojekyll`).
+- Fontes do Google Fonts (Space Grotesk, Inter, JetBrains Mono); ícones Lucide
+  (licença ISC) embutidos como SVG.
+- Zona segura: [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/)
+  no navegador + Cloudflare Worker (repositório privado, separado deste).
 
-O site foi construído utilizando tecnologias web puras (Vanilla) para máxima velocidade e controle:
-* **HTML5 Semântico**: Estrutura organizada com tags nativas (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`).
-* **CSS3 Customizado**: Estilização baseada em tokens de design próprios, sem frameworks de terceiros (como Bootstrap ou Tailwind).
-* **JavaScript Nativo (Vanilla JS)**: Código de interação reescrito do zero, livre de dependências como jQuery.
-* **GSAP (GreenSock Animation Platform) v3**: Responsável por todas as animações fluidas de abertura e transições entre seções.
-* **Particles.js**: Efeito visual de fundo com partículas interativas no header do site.
+## Estrutura
 
----
+```
+index.html          página em português
+en/index.html       página em inglês (mesma estrutura, caminhos com ../)
+404.html            página de erro (caminhos absolutos)
+css/tokens.css      cores e fontes dos dois temas
+css/styles.css      todo o resto, mobile-first
+js/strings.js       textos que o JS monta (PT/EN), pelo <html lang>
+js/polygons.js      malha de polígonos do fundo
+js/zone.js          zona segura: modal, Turnstile, conversa com o Worker
+js/main.js          tema, menu, scrollspy, animações, anos calculados
+images/             foto, favicons, imagens de compartilhamento (og-image*.png)
+robots.txt, sitemap.xml, CNAME, .nojekyll
+```
 
-## ⚡ Detalhes da Refatoração & Otimização
+Fora do repositório (no `.gitignore`): `private/` (currículo em PDF e conteúdo
+da zona segura, que vão para o Worker), `preview/` (prévia de design) e `.claude/`.
 
-* **Remoção do jQuery**: A eliminação da biblioteca `jquery.min.js` reduziu o peso inicial da página em cerca de **83KB** e cortou requisições desnecessárias.
-* **Carregamento Otimizado de Fontes**: Removidos os `@import` que bloqueavam a renderização de dentro dos arquivos CSS. Agora, as fontes são pré-conectadas (`preconnect`) e carregadas de forma assíncrona no `<head>` do HTML.
-* **Resolução de Bugs Visuais**: Corrigida a inconsistência em que as barras de progresso de habilidades (como AWS) preenchiam larguras incorretas no CSS em relação ao texto exibido no HTML.
-* **Melhoria de SEO**:
-  * Inserção de uma tag `<h1>` principal para indexação do motor de busca.
-  * Otimização de metadados (`meta description` e `meta keywords`), removendo termos padrão de templates.
-  * Correção de erros de ortografia em português.
-* **Segurança**: Inserção automática de `rel="noopener noreferrer"` em todos os links externos que abrem em nova aba (`target="_blank"`), evitando vulnerabilidades como *tabnabbing*.
-* **Acessibilidade (a11y)**:
-  * Elementos do menu hambúrguer e botão fechar foram alterados de `div` genéricas para `<button>` nativos com `aria-label` descritivo.
-  * Adicionado suporte a leitores de tela e navegação por teclado.
+## Rodar localmente
 
----
+```bash
+python -m http.server 5510
+```
 
-## 🤖 Desenvolvimento AI-First (Como Estender o Site)
+Abra `http://localhost:5510/` e `http://localhost:5510/en/`.
 
-O repositório está equipado com um arquivo **[.cursorrules](.cursorrules)** na raiz. Esse arquivo contém todas as especificações técnicas, padrões de classes CSS (como as classes de barras de habilidade), e regras comportamentais de transição de seções em JS.
+Em `localhost`, a zona segura usa automaticamente o Worker local do
+`wrangler dev` (porta 8787) e a chave de teste do Turnstile, que sempre passa.
 
-Ao trabalhar com assistentes de IA (como Gemini, Cursor, Copilot), o arquivo `.cursorrules` será lido automaticamente pela IA, garantindo que qualquer nova funcionalidade criada respeite as regras de design e a semântica do projeto.
+## Acrescentar conteúdo
 
----
+Cada item é um bloco de HTML marcado com comentário — copie, cole e preencha,
+**nas duas páginas** (`index.html` e `en/index.html`):
 
-## 💻 Como Rodar Localmente
+| Conteúdo | Bloco | Onde |
+| --- | --- | --- |
+| Experiência ou formação | `<li class="tl-item">` (`data-tipo`: `experiencia`, `formacao` ou `inicio`) | `#trajetoria` |
+| Categoria de habilidades | `<article class="card ...">` com `<ul class="chips">` | `#habilidades` |
+| Habilidade | `<li class="chip" data-nivel="diario\|solido\|conhecimento">` | dentro da categoria |
+| Projeto | `<article class="card project ...">` | `#projetos` |
+| Interesse ou hobby | `<article class="card interest ...">` | `#interesses` |
 
-Por se tratar de um site totalmente estático, nenhuma etapa de compilação ou build é necessária:
-1. Clone o repositório em sua máquina.
-2. Dê dois cliques em `index.html` para abrir diretamente no navegador ou utilize uma extensão de servidor local (como *Live Server* do VS Code).
+As grades se ajustam sozinhas ao número de cartões; nada precisa mudar no CSS
+ou no JS. Cores dos cartões: `tone-crimson`, `tone-violet`, `tone-sky`,
+`tone-fuchsia`, `tone-indigo`, `tone-teal`, `tone-orange`.
+
+## Zona segura
+
+- Nada restrito mora neste repositório (ele é público): o Worker devolve o
+  conteúdo depois de validar o token do Turnstile no servidor.
+- O contrato entre o site e o Worker está no topo de `js/zone.js`.
+- Para ligar em produção, preencha no `<head>` das duas páginas:
+  `<meta name="zone-endpoint">` (endereço do Worker) e
+  `<meta name="zone-sitekey">` (chave pública do Turnstile). Vazias, o modal
+  avisa que a zona ainda não está no ar.
+- O conteúdo vindo do servidor é montado com `textContent`, nunca `innerHTML`.
+
+## Publicar
+
+A `main` é publicada pelo GitHub Pages a cada push. Trabalhe numa branch e
+faça o merge só quando estiver pronto.

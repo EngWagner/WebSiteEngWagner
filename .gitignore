@@ -1,0 +1,4 @@
+# Nunca publicar: conteúdo da zona segura (vai para o Worker), prévias e config local.
+private/
+preview/
+.claude/

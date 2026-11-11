@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página não encontrada · Wagner Barbosa</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#090e1a">
+  <!-- O GitHub Pages serve esta página em qualquer endereço inexistente, inclusive
+       dentro de /en/: por isso os caminhos são absolutos (começam com /). -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .nf { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 32px 16px; }
+    .nf-mark { width: 64px; height: 74px; margin: 0 auto 28px; display: grid; place-items: center; clip-path: var(--hex); background: var(--grad); color: #fff; font-family: var(--font-display); font-weight: 700; }
+    .nf-code { font-family: var(--font-display); font-weight: 700; font-size: clamp(5rem, 3rem + 10vw, 9rem); line-height: 1; letter-spacing: -.04em; }
+    .nf h1 { font-family: var(--font-display); font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem); margin: 12px 0 8px; }
+    .nf p { color: var(--text-muted); }
+    .nf p[lang="en"] { font-size: .92rem; color: var(--text-faint); }
+    .nf .cta-row { justify-content: center; margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <div class="mesh" aria-hidden="true"><canvas id="mesh"></canvas></div>
+  <div class="mesh-glow" aria-hidden="true"></div>
+
+  <main class="nf">
+    <div>
+      <span class="nf-mark" aria-hidden="true">WB</span>
+      <p class="nf-code" aria-hidden="true"><span class="grad-text">404</span></p>
+      <h1>Esta página não existe <span lang="en">· Page not found</span></h1>
+      <p>O endereço pode ter mudado ou sido digitado errado.</p>
+      <p lang="en">The address may have changed or been mistyped.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/">Ir para o início</a>
+        <a class="btn btn-ghost" href="/en/" hreflang="en" lang="en">Go to the English version</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/polygons.js"></script>
+  <script>if (window.Polygons) Polygons.init(document.getElementById('mesh'));</script>
+</body>
+</html>

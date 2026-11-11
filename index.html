@@ -1,337 +1,702 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Engenheiro de computação pós-graduado em Segurança da Informação e em Big Data. Possui mais de 10 anos de experiência com TI, incluindo desenvolvimento de sistemas e computação em nuvem." />
-    <meta name="keywords" content="Wagner Barbosa, engenheiro de computacao, desenvolvedor dotnet, csharp, backend, programador, Tapira, Londrina, imenu, banco de dados, mongodb, postgresql, sql server, mql5, computacao em nuvem, aws, git" />
-    <meta name="author" content="Wagner Barbosa" />
-    <title>Wagner Barbosa | Engenheiro de Computação</title>
-    <!-- Google Fonts Preconnect and Load -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Poppins:wght@500;700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
-    <!--favicon-img-->
-    <link rel="icon" type="image/png" href="images/thumbnail.PNG">
-    <!--main css files -->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/media_max550px.css">
-    <link rel="stylesheet" href="css/media_551px_1025px.css">
-    <link rel="stylesheet" href="css/media_1441px_9000px.css">
-    <!-- GSAP for animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HW10G16KTK"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); } gtag('js', new Date());
-        gtag('config', 'G-HW10G16KTK');
-    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wagner Barbosa · Desenvolvedor .NET</title>
+  <meta name="description" content="Engenheiro de computação, pós-graduado em Segurança da Informação e em Big Data. Desenvolvedor .NET com foco em backend, AWS e dados.">
+  <meta name="author" content="Wagner Barbosa">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#090e1a">
+  <link rel="canonical" href="https://engwagner.com.br/">
+  <link rel="alternate" hreflang="pt-BR" href="https://engwagner.com.br/">
+  <link rel="alternate" hreflang="en" href="https://engwagner.com.br/en/">
+  <link rel="alternate" hreflang="x-default" href="https://engwagner.com.br/">
+
+  <!-- Prévia de link (LinkedIn, WhatsApp, buscadores) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wagner Barbosa">
+  <meta property="og:title" content="Wagner Barbosa · Desenvolvedor .NET">
+  <meta property="og:description" content="Backend em .NET, AWS e dados — com pós em Segurança da Informação e em Big Data.">
+  <meta property="og:url" content="https://engwagner.com.br/">
+  <meta property="og:image" content="https://engwagner.com.br/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Wagner Barbosa — Desenvolvedor .NET">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Zona segura: preenchidas quando o Worker for publicado (PLANO-REDESIGN.md, §12).
+       Vazias, o modal avisa que a zona ainda não está no ar. -->
+  <meta name="zone-endpoint" content="">
+  <meta name="zone-sitekey" content="">
+
+  <!-- Tema antes da primeira pintura: escuro por padrão, sem "piscar". -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script defer src="js/strings.js"></script>
+  <script defer src="js/polygons.js"></script>
+  <script defer src="js/zone.js"></script>
+  <script defer src="js/main.js"></script>
+
+  <!-- Google Analytics (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HW10G16KTK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-HW10G16KTK');
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Wagner Barbosa",
+    "url": "https://engwagner.com.br/",
+    "image": "https://engwagner.com.br/images/wagner.webp",
+    "jobTitle": "Desenvolvedor .NET",
+    "worksFor": { "@type": "Organization", "name": "Total Acesso" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "UNOPAR" },
+    "knowsAbout": [".NET", "C#", "CQRS", "AWS", "SQL Server", "PostgreSQL", "MongoDB", "DynamoDB", "Segurança da Informação", "Big Data"],
+    "sameAs": ["https://www.linkedin.com/in/engwagner/", "https://github.com/EngWagner"]
+  }
+  </script>
 </head>
 
 <body>
-    <!--contains all the div-->
-    <div id="all">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-        <!--loader-->
-        <div id="loader">
-            <span class="color">Wagner</span>Barbosa
-        </div>
-        <!--loader-end-->
-        <!--link-screen-->
-        <div id="breaker">
-        </div>
-        <div id="breaker-two">
-        </div>
-        <!--link-screen-->
-        <!--Main-Section-->
-        <!--Navigator-fullscreen-->
-        <nav id="navigation-content">
-            <div class="logo">
-                <a href="index.html"><img src="images/home_logo.png" alt="Wagner Barbosa Logo"></a>
+  <!-- Ícones (Lucide, licença ISC) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+    <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10M7 17 17 7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-trending" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+    <symbol id="i-log-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5M21 12H9"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+  </svg>
+
+  <!-- Fundo: malha de polígonos (canvas) + brilhos -->
+  <div class="mesh" aria-hidden="true"><canvas id="mesh"></canvas></div>
+  <div class="mesh-glow" aria-hidden="true"></div>
+
+  <!-- ===================== CABEÇALHO ===================== -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="Wagner Barbosa">
+        <span class="brand-mark" aria-hidden="true">WB</span>
+        <span class="brand-name">Wagner Barbosa</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Principal">
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#trajetoria">Trajetória</a></li>
+          <li><a href="#habilidades">Habilidades</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#interesses">Interesses</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="zone-wrap" id="zone-wrap">
+          <button class="zone-btn" type="button" data-zone-open aria-haspopup="dialog" aria-describedby="zone-tip">
+            <svg class="i i-sm i-shield" aria-hidden="true"><use href="#i-shield"/></svg>
+            <svg class="i i-sm i-shield-check" aria-hidden="true"><use href="#i-shield-check"/></svg>
+            <span class="zone-label">Zona segura</span>
+            <span class="zone-timer" id="zone-timer"></span>
+          </button>
+          <!-- Tooltip: ao passar o mouse ou focar pelo teclado -->
+          <span class="zone-tip" role="tooltip" id="zone-tip">
+            <span class="tip-off"><strong>O que é a zona segura?</strong><span>Meu contato direto, o currículo e a minha história. Para entrar: consentimento e verificação anti-robô — o acesso fica registrado.</span></span>
+            <span class="tip-on"><strong>Zona segura ativa</strong><span>Clique para ver o registro do seu acesso ou para sair.</span></span>
+          </span>
+          <!-- Sugestão: uma vez por sessão (5 s na página ou um terço rolado) -->
+          <div class="zone-nudge" id="zone-nudge" role="region" aria-live="polite" aria-label="Sugestão" hidden>
+            <span class="card-icon tone-zone"><svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <div>
+              <h3>Deseja falar comigo ou ver mais detalhes?</h3>
+              <p>Contato direto, currículo e a minha história estão na zona segura. É rápido: consentimento, um clique de verificação e pronto.</p>
+              <div class="nudge-actions">
+                <button class="btn btn-ghost btn-sm" type="button" data-nudge-close>Agora não</button>
+                <button class="btn btn-zone btn-sm" type="button" data-zone-open><span>Visualizar</span></button>
+              </div>
             </div>
-            <button type="button" class="navigation-close" aria-label="Fechar Menu">
-                <span class="close-first"></span>
-                <span class="close-second"></span>
-            </button>
-            <div class="navigation-links">
-                <a href="#" data-text="INÍCIO" id="home-link">INÍCIO</a>
-                <a href="#" data-text="SOBRE" id="about-link">SOBRE</a>
-                <a href="#" data-text="CONTATO" id="contact-link">CONTATO</a>
-            </div>
-        </nav>
-        <!--Navigator-Fullscreen END-->
-        <!--Home Page-->
-        <!--Menubar-->
-        <div id="navigation-bar">
-            <a href="index.html"><img src="images/home_logo.png" alt="Wagner Barbosa Logo"></a>
-            <button type="button" class="menubar" aria-label="Abrir Menu">
-                <span class="first-span"></span>
-                <span class="second-span"></span>
-                <span class="third-span"></span>
-            </button>
+          </div>
         </div>
-        <!--Menubar End-->
-        <!--Header-->
-        <header id="header">
-            <div id="particles"></div>
-            <!--Social Media Links-->
-
-            <!--Social Media Links end-->
-            <div class="header-content">
-                <div class="header-content-box">
-                    <h1 class="firstline"><span class="color">Wagner </span>Barbosa</h1>
-                    <div class="secondline">
-                        Às vezes
-                        <span class="txt-rotate color" data-period="1200"
-                            data-rotate='[ " engenheiro", " programador", " empreendedor", " investidor" ]'></span>
-                        <span class="slash">|</span>
-                    </div>
-                    <div class="contact">
-                        <div class="social-media-links">
-                            <a href="https://wa.me/5543999053820" target="_blank" rel="noopener noreferrer"><img
-                                    src="images/logo_whatsapp_branco.png" class="social-media" title="WhatsApp"
-                                    alt="whatsapp-logo"></a>
-                            <a href="https://www.instagram.com/engwagnerbarbosa" target="_blank" rel="noopener noreferrer"><img
-                                    src="images/instagram logo.png" class="social-media" title="Instagram"
-                                    alt="instagram-logo"></a>
-                            <a href="https://www.facebook.com/eng.wagnerbarbosa" target="_blank" rel="noopener noreferrer"><img
-                                    src="images/facebook logo.png" class="social-media" title="Facebook"
-                                    alt="facebook-logo"></a>
-                            <a href="https://www.linkedin.com/in/engwagner/" target="_blank" rel="noopener noreferrer"><img
-                                    src="images/linkedin logo.png" class="social-media" title="LinkedIn"
-                                    alt="linkedin-logo"></a>
-                            <a href="https://github.com/EngWagner" target="_blank" rel="noopener noreferrer"><img
-                                    src="images/logo_github_branco.png" class="social-media" title="GitHub"
-                                    alt="github-logo"></a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--header image-->
-            <div class="header-image">
-                <img src="images/wagner-barbosa-pb.png" alt="Foto preto e branco de Wagner Barbosa">
-            </div>
-            <!--header image end-->
-        </header>
-        <!--Header End-->
-        <!--HomePage End-->
-        <!--Main-Section End-->
-        <main>
-            <!--about-->
-            <section id="about">
-                <!--about content-->
-                <div id="about-content">
-                    <h2 class="about-header">
-                        Sobre <span class="color">Mim</span>
-                    </h2>
-                    <div class="about-main">
-                        <div class="about-first-paragraph">
-                            <!--about description-->
-                            <span class="about-first-line">
-                                <span class="color"></span>
-                            </span>
-                            <br>
-                            <span class="about-second-line">
-                                Sou engenheiro de computação formado pela UNOPAR em Londrina-PR, pós-graduado em Segurança
-                                da Informação e em Big Data, tenho mais de 10 anos de experiência com TI,
-                                sou fundador e proprietário do sistema <a href="https://imenu.se" target="_blank" rel="noopener noreferrer">
-                                    <span class="text-link">iMenu🔗</span></a> no Brasil.
-                            </span>
-                            <div class="cv">
-                                <a href="data/CV_WagnerBarbosa_Portugues.pdf" target="_blank" rel="noopener noreferrer"><button type="button">Download <span
-                                             class="colors">CV</span></button></a>
-                            </div>
-                        </div>
-                        <!--about picture-->
-                        <div class="about-img">
-                            <img src="images/wagner-barbosa.jpeg" alt="Wagner Barbosa">
-                        </div>
-                    </div>
-
-                </div>
-                <!--services start-->
-                <div id="services">
-                    <!--services header-->
-                    <h2 class="services-heading">
-                        <span class="color">Principais</span> Habilidades
-                    </h2>
-                    <!--services header end-->
-                    <!--services content-->
-                    <div class="services-content">
-                        <div class="service-one service">
-                            <div class="service-img">
-                                <img src="images/coding.png" alt="Desenvolvimento Backend">
-                            </div>
-                            <div class="service-description">
-                                <h3>Backend</h3>
-                                <p>Atuo no desenvolvimento backend com .NET há cerca de 4 anos e sou apaixonado pelo poder
-                                    dessa tecnologia.</p>
-                            </div>
-                        </div>
-                        <div class="service-two service">
-                            <div class="service-img">
-                                <img src="images/database_logo.png" alt="Banco de Dados Relacionais e Não-Relacionais">
-                            </div>
-                            <div class="service-description">
-                                <h3>Banco de Dados</h3>
-                                <p>Além de experiência com bancos relacionais, como o SQL Server e PostgreSQL, também possuo
-                                    ampla experiência com MongoDB, um banco de dados orientado a documentos e utilizado por
-                                    grandes empresas.</p>
-                            </div>
-                        </div>
-                        <div class="service-three service">
-                            <div class="service-img">
-                                <img src="images/logo_trading.png" alt="Trading Algorítmico MQL5">
-                            </div>
-                            <div class="service-description">
-                                <h3>Bolsa de valores</h3>
-                                <p>Tenho como um de meus hobbies o estudo e uso do MQL5 para investimentos automatizados.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--services content end-->
-                <!--services end-->
-                <div id="skills">
-                    <h2 class="skills-header">
-                        Habilidades <span class="color"> Gerais</span>
-                    </h2>
-                    <div class="skills-content" style="text-align: center;">
-                        <div class="skill-html skill">
-                            <div class="skill-text">
-                                <div class="html">
-                                    C#
-                                </div>
-                            </div>
-                            <div class="prog">
-                                <div class="progress-bar csharp-bar">85%</div>
-                            </div>
-                        </div>
-                        <div class="skill-html skill">
-                            <div class="skill-text">
-                                <div class="html">
-                                    MongoDB
-                                </div>
-                            </div>
-                            <div class="prog">
-                                <div class="progress-bar mongodb-bar">75%</div>
-                            </div>
-                        </div>
-                        <div class="skill-html skill">
-                            <div class="skill-text">
-                                <div class="html">
-                                    SQL Server
-                                </div>
-                            </div>
-                            <div class="prog">
-                                <div class="progress-bar sqlserver-bar">50%</div>
-                            </div>
-                        </div>
-                        <div class="skill-html skill">
-                            <div class="skill-text">
-                                <div class="html">
-                                    JavaScript
-                                </div>
-                            </div>
-                            <div class="prog">
-                                <div class="progress-bar javascript-bar">45%</div>
-                            </div>
-                        </div>
-                        <div class="skill-html skill">
-                            <div class="skill-text">
-                                <div class="html">
-                                    AWS
-                                </div>
-                            </div>
-                            <div class="prog">
-                                <div class="progress-bar aws-bar">20%</div>
-                            </div>
-                        </div>
-                        <div class="skill-html skill">
-                            <div class="skill-text">
-                                <div class="html">
-                                    Git
-                                </div>
-                            </div>
-                            <div class="prog">
-                                <div class="progress-bar git-bar">84%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--copyright-section You Can Remove After Downloading-->
-                <footer class="footer">
-                    <div class="footer-text">
-                        <img src="./images/copyright.png" alt="copyright-img" class="images" height="14px"> Wagner Barbosa
-                    </div>
-                </footer>
-                <!--copyright-section-->
-            </section>
-        <!--about end-->
-            <!--contact-->
-            <section id="contact">
-                <h2 class="contact-header">Contate<span class="color">-me</span>
-                </h2>
-                <div class="contact-content">
-                    <!--Contact information-->
-                    <div class="contact-info">
-                        <div class="contact-info-content">
-                            <div class="contect-info-content-line">
-                                <img src="./images/icon-name.png" class="icon" alt="Ícone Nome">
-                                <div class="contact-info-icon-text">
-                                    <h3>Nome</h3>
-                                    <p>Wagner Barbosa</p>
-                                </div>
-                            </div>
-                            <div class="contect-info-content-line">
-                                <img src="./images/icon-location.png" class="icon" alt="Ícone Localização">
-                                <div class="contact-info-icon-text">
-                                    <h3>Localização</h3>
-                                    <p>Tapira-PR, Brasil</p>
-                                </div>
-                            </div>
-                            <div class="contect-info-content-line">
-                                <img src="./images/icon-phone.png" class="icon" alt="Ícone Telefone">
-                                <div class="contact-info-icon-text">
-                                    <h3>Telefone</h3>
-                                    <p>+55 43 99905-3820</p>
-                                </div>
-                            </div>
-
-                            <div class="contect-info-content-line">
-                                <img src="./images/icon-email.png" class="icon" alt="Ícone E-mail">
-                                <div class="contact-info-icon-text">
-                                    <h3>E-mail</h3>
-                                    <p>engwagnerbarbosa@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Contact information end-->
-                    </div>
-                </div>
-                <!--copyright-section You Can Remove After Downloading-->
-                <footer class="footer">
-                    <div class="footer-text">
-                        <img src="./images/copyright.png" alt="copyright-img" class="images" height="14px"> Wagner Barbosa
-                    </div>
-                </footer>
-                <!--copyright-section-->
-            </section>
-            <!--contact end-->
-        </main>
+        <a class="icon-btn lang-btn" id="lang-link" href="en/" hreflang="en" lang="en" aria-label="English version">EN</a>
+        <button class="icon-btn theme-btn" type="button" id="theme-toggle">
+          <svg class="i i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+          <svg class="i i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        </button>
+        <button class="icon-btn menu-btn" type="button" id="menu-toggle" aria-expanded="false" aria-controls="nav">
+          <svg class="i i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="i i-x" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
     </div>
-    <!--all the divisions-->
-    <!-- Three.js (WebGL Library) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Main scripts (Vanilla JS) -->
-    <script src="js/index.js"></script>
-    <!-- Interactive Particle Waves (antigravity.google effect) -->
-    <script src="js/antigravity.js"></script>
+  </header>
 
+  <main id="conteudo">
+
+    <!-- ===================== HERÓI ===================== -->
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow reveal">Desenvolvedor .NET · Backend · AWS</p>
+          <h1 class="reveal"><span class="grad-text">Wagner Barbosa</span></h1>
+          <p class="rotator reveal">
+            <span>Às vezes</span>
+            <span class="txt-rotate" aria-hidden="true" data-rotate='["engenheiro", "programador", "empreendedor", "investidor"]'></span><span class="caret" aria-hidden="true"></span>
+            <span class="sr-only">engenheiro, programador, empreendedor e investidor.</span>
+          </p>
+          <p class="lead reveal">Engenheiro de computação, pós-graduado em <strong>Segurança da Informação</strong> e em <strong>Big Data</strong>. Construo backends em .NET seguros, rápidos e escaláveis — e sigo compartilhando o que aprendo pelo caminho.</p>
+          <ul class="hero-stack reveal" aria-label="Principais tecnologias">
+            <li><span class="dot" style="--d: var(--accent)"></span>.NET 8 · C#</li>
+            <li><span class="dot" style="--d: var(--violet)"></span>AWS · Serverless</li>
+            <li><span class="dot" style="--d: var(--sky)"></span><span>Segurança da Informação</span></li>
+            <li><span class="dot" style="--d: #e879f9"></span>SQL · NoSQL</li>
+          </ul>
+          <div class="cta-row reveal">
+            <a class="btn btn-primary" href="#trajetoria">
+              <span>Ver trajetória</span>
+              <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow-down"/></svg>
+            </a>
+            <!-- RESTRITO: com a zona aberta, vira o botão do currículo -->
+            <span data-zone-slot="hero-cta">
+              <button class="btn btn-ghost" type="button" data-zone-open>
+                <svg class="i i-sm" aria-hidden="true"><use href="#i-lock"/></svg>
+                <span>Entrar na zona segura</span>
+              </button>
+            </span>
+          </div>
+          <div class="hero-meta reveal">
+            <span class="status"><span class="pulse" aria-hidden="true"></span><span>Hoje: <strong>Desenvolvedor .NET</strong> na Total Acesso</span></span>
+            <div class="socials">
+              <a class="social" href="https://www.linkedin.com/in/engwagner/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="i" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+              <a class="social" href="https://github.com/EngWagner" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="portrait reveal">
+          <div class="portrait-ring" aria-hidden="true"></div>
+          <div class="portrait-img">
+            <img src="images/wagner.webp" width="720" height="831" alt="Foto de Wagner Barbosa" fetchpriority="high">
+          </div>
+          <!-- Moldura decorativa: dois hexágonos girando devagar em volta da foto -->
+          <svg class="portrait-orbit" viewBox="-52 -52 104 104" aria-hidden="true">
+            <defs>
+              <linearGradient id="orbit-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" style="stop-color: var(--accent)"/>
+                <stop offset=".5" style="stop-color: var(--violet)"/>
+                <stop offset="1" style="stop-color: var(--sky)"/>
+              </linearGradient>
+            </defs>
+            <g class="orbit orbit-a">
+              <polygon points="0,-45 38.97,-22.5 38.97,22.5 0,45 -38.97,22.5 -38.97,-22.5"/>
+              <circle cx="38.97" cy="-22.5" r="1.3" style="fill: var(--accent)"/>
+              <circle cx="-38.97" cy="22.5" r="1.3" style="fill: var(--sky)"/>
+            </g>
+            <g class="orbit orbit-b">
+              <polygon points="0,-50.5 43.73,-25.25 43.73,25.25 0,50.5 -43.73,25.25 -43.73,-25.25"/>
+              <circle cx="0" cy="50.5" r="1.1" style="fill: var(--violet)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#numeros" aria-label="Rolar para baixo"><svg class="i i-sm" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+    </section>
+
+    <!-- ===================== NÚMEROS ===================== -->
+    <section class="container" id="numeros" aria-label="Em números">
+      <div class="stats">
+        <div class="stat reveal"><div class="stat-num grad-text"><span data-years-since="2014-06">12</span>+</div><div class="stat-label">anos em TI, desde o primeiro emprego como técnico</div></div>
+        <div class="stat reveal"><div class="stat-num grad-text"><span data-years-since="2021-05">5</span>+</div><div class="stat-label">anos desenvolvendo com .NET</div></div>
+        <div class="stat reveal"><div class="stat-num grad-text">3</div><div class="stat-label">formações: engenharia, MBA e pós</div></div>
+        <div class="stat reveal"><div class="stat-num grad-text">3</div><div class="stat-label">empreendimentos: Uaus, iMenu e Alphamira</div></div>
+      </div>
+    </section>
+
+    <!-- ===================== 01 · SOBRE ===================== -->
+    <section class="section" id="sobre">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">01 · <span>Sobre</span> <span class="class-tag">Público</span></p>
+          <h2 class="section-title">Engenharia, segurança e um pé no empreendedorismo</h2>
+        </header>
+
+        <div class="about-grid">
+          <div class="prose reveal">
+            <p>Comecei na TI em meados de <strong>2014</strong>, como técnico de informática e, depois, no suporte técnico. De lá para cá passei pelo service desk de uma multinacional, me formei em <strong>Engenharia da Computação</strong>, concluí duas especializações e migrei de vez para o desenvolvimento backend.</p>
+            <p>Hoje trabalho com <strong>.NET 8</strong>, arquiteturas distribuídas e serviços na <strong>AWS</strong>. Fora do expediente, cuido dos meus próprios negócios — a loja <strong>Uaus</strong>, o <strong>iMenu</strong> e o <strong>Alphamira</strong> — e estudo o mercado financeiro.</p>
+            <p>Este site segue o que eu defendo no trabalho: o profissional é público; o pessoal fica na <strong>zona segura</strong>, com acesso verificado e registrado.</p>
+          </div>
+
+          <!-- RESTRITO: o texto real chega do Worker depois da verificação -->
+          <article class="card reveal tone-zone" data-zone-slot="story">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="restricted-head">
+              <h3>Minha história</h3>
+              <span class="class-tag is-restricted"><svg class="i i-sm" aria-hidden="true"><use href="#i-lock"/></svg><span>Restrito</span></span>
+            </div>
+            <div class="redacted" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+            <p class="locked-note"><svg class="i i-sm" aria-hidden="true"><use href="#i-lock"/></svg><span>A versão completa é pessoal e fica na zona segura.</span></p>
+            <button class="btn btn-ghost btn-sm" type="button" data-zone-open>
+              <svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg><span>Desbloquear</span>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 02 · TRAJETÓRIA ===================== -->
+    <section class="section" id="trajetoria">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">02 · <span>Trajetória</span> <span class="class-tag">Público</span></p>
+          <h2 class="section-title">De técnico de informática a tech lead em desenvolvimento de software</h2>
+          <p class="section-sub">Mais de uma década de TI, do suporte ao backend distribuído — com a formação acontecendo no meio do caminho.</p>
+        </header>
+
+        <ol class="timeline">
+          <!-- ITEM DA TRAJETÓRIA — copie o <li> inteiro (nos dois idiomas).
+               data-tipo: experiencia | formacao | inicio. O id vira link direto (#xp-...). -->
+          <li class="tl-item reveal" data-tipo="experiencia" id="xp-total-acesso">
+            <p class="tl-date"><time datetime="2024-11">11/2024</time> – <span>atual</span></p>
+            <span class="tl-marker" aria-hidden="true"></span>
+            <article class="card tl-card">
+              <span class="type-pill">Experiência</span>
+              <h3>Desenvolvedor .NET</h3>
+              <p class="org"><span>Total Acesso</span><span aria-hidden="true">·</span><span>grupo Diverti</span></p>
+              <p>Backend de uma plataforma distribuída de venda de ingressos, com arquitetura CQRS e microsserviços na AWS.</p>
+              <ul class="chips" aria-label="Tecnologias">
+                <li class="chip">.NET 8</li><li class="chip">CQRS</li><li class="chip">SQL Server</li><li class="chip">AWS</li>
+                <li class="chip">Microsserviços</li><li class="chip">Testes unitários</li><li class="chip">Jira</li>
+              </ul>
+            </article>
+          </li>
+          <!-- /ITEM DA TRAJETÓRIA -->
+
+          <li class="tl-item reveal" data-tipo="experiencia" id="xp-retornar">
+            <p class="tl-date"><time datetime="2021-05">05/2021</time> – <time datetime="2024-11">11/2024</time></p>
+            <span class="tl-marker" aria-hidden="true"></span>
+            <article class="card tl-card">
+              <span class="type-pill">Experiência</span>
+              <h3>Tech Lead em Backend</h3>
+              <p class="org"><span>Retornar Tecnologia</span></p>
+              <p>E-commerce de eBooks e apostas online. Desenvolvi o backend em .NET e liderei o time.</p>
+              <ul class="highlights">
+                <li>Planejamento das entregas e code review do time</li>
+                <li>Integrações com diversos parceiros e serviços de terceiros</li>
+                <li>Microsserviços na AWS com MongoDB, PostgreSQL e DynamoDB</li>
+              </ul>
+              <ul class="chips" aria-label="Tecnologias">
+                <li class="chip">.NET</li><li class="chip">MongoDB</li><li class="chip">PostgreSQL</li><li class="chip">DynamoDB</li>
+                <li class="chip">EF6</li><li class="chip">AWS</li><li class="chip">Liderança técnica</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="tl-item reveal" data-tipo="formacao" id="edu-pos">
+            <p class="tl-date"><time datetime="2021">2021</time></p>
+            <span class="tl-marker" aria-hidden="true"></span>
+            <article class="card tl-card">
+              <span class="type-pill">Formação</span>
+              <h3>MBA em Segurança da Informação · Pós-graduação em Big Data</h3>
+              <p class="org"><span>Descomplica</span></p>
+              <p>Criptografia, táticas de segurança e arquitetura de sistemas; dados relacionais e não relacionais em escala.</p>
+            </article>
+          </li>
+
+          <li class="tl-item reveal" data-tipo="formacao" id="edu-engenharia">
+            <p class="tl-date"><time datetime="2020">2020</time></p>
+            <span class="tl-marker" aria-hidden="true"></span>
+            <article class="card tl-card">
+              <span class="type-pill">Formação</span>
+              <h3>Engenharia da Computação</h3>
+              <p class="org"><span>UNOPAR</span><span aria-hidden="true">·</span><span>Londrina-PR</span></p>
+              <p>Base em bancos de dados, linguagens de programação, cálculo, robótica e inteligência artificial.</p>
+            </article>
+          </li>
+
+          <li class="tl-item reveal" data-tipo="experiencia" id="xp-tcs">
+            <p class="tl-date"><time datetime="2019-05">05/2019</time> – <time datetime="2021-04">04/2021</time></p>
+            <span class="tl-marker" aria-hidden="true"></span>
+            <article class="card tl-card">
+              <span class="type-pill">Experiência</span>
+              <h3>Analista de Service Desk</h3>
+              <p class="org"><span>Tata Consultancy Services</span></p>
+              <p>Multinacional indiana de consultoria em TI: metodologias ágeis, ITIL e ferramentas corporativas.</p>
+              <ul class="chips" aria-label="Tecnologias">
+                <li class="chip">Scrum</li><li class="chip">ITIL</li><li class="chip">Control-M</li><li class="chip">SAP GUI</li><li class="chip">Active Directory</li><li class="chip">ServiceNow</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="tl-item reveal" data-tipo="inicio" id="xp-inicio">
+            <p class="tl-date"><time datetime="2014">2014</time> – <time datetime="2019">2019</time></p>
+            <span class="tl-marker" aria-hidden="true"></span>
+            <article class="card tl-card">
+              <span class="type-pill">Início</span>
+              <h3>Técnico de informática e suporte técnico</h3>
+              <p class="org"><span>Primeiros passos na TI</span></p>
+              <p>Onde tudo começou: primeiro como técnico de informática, depois no suporte técnico.</p>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== 03 · HABILIDADES ===================== -->
+    <section class="section" id="habilidades">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">03 · <span>Habilidades</span> <span class="class-tag">Público</span></p>
+          <h2 class="section-title">O que eu levo para o time</h2>
+          <p class="section-sub">Agrupadas por área. O marcador indica a intensidade de uso — sem porcentagens inventadas.</p>
+        </header>
+
+        <div class="bento-head reveal">
+          <ul class="legend">
+            <li class="chip" data-nivel="diario">Uso diário</li>
+            <li class="chip" data-nivel="solido">Experiência sólida</li>
+            <li class="chip" data-nivel="conhecimento">Conhecimento</li>
+          </ul>
+        </div>
+
+        <div class="bento">
+          <!-- CATEGORIA DE HABILIDADE — copie o <article> inteiro (nos dois idiomas).
+               Chip: data-nivel="diario | solido | conhecimento", ou sem nível.
+               Largura: is-wide (2/3) ou is-half (1/2); sem classe ocupa 1/3. -->
+          <article class="card reveal tone-crimson is-wide">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-code"/></svg></span>
+            <h3>Backend .NET</h3>
+            <p>APIs e serviços distribuídos em C#, do desenho da arquitetura ao código revisado em produção.</p>
+            <ul class="chips">
+              <li class="chip" data-nivel="diario">C#</li><li class="chip" data-nivel="diario">.NET 8</li><li class="chip" data-nivel="solido">.NET Core</li>
+              <li class="chip" data-nivel="diario">CQRS</li><li class="chip" data-nivel="diario">Microsserviços</li>
+              <li class="chip" data-nivel="solido">Entity Framework</li><li class="chip" data-nivel="diario">APIs REST</li>
+              <li class="chip" data-nivel="solido">Integrações com terceiros</li>
+            </ul>
+          </article>
+          <!-- /CATEGORIA DE HABILIDADE -->
+
+          <article class="card reveal tone-sky">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-database"/></svg></span>
+            <h3>Dados</h3>
+            <p>Relacionais e não relacionais, com a pós em Big Data por trás.</p>
+            <ul class="chips">
+              <li class="chip" data-nivel="diario">SQL Server</li><li class="chip" data-nivel="solido">PostgreSQL</li>
+              <li class="chip" data-nivel="solido">MongoDB</li><li class="chip" data-nivel="solido">DynamoDB</li><li class="chip" data-nivel="conhecimento">Big Data</li>
+            </ul>
+          </article>
+
+          <article class="card reveal tone-violet">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-cloud"/></svg></span>
+            <h3>Cloud AWS</h3>
+            <p>Microsserviços e serverless em produção desde 2021.</p>
+            <ul class="chips">
+              <li class="chip" data-nivel="solido">Lambda</li><li class="chip" data-nivel="solido">SQS</li><li class="chip" data-nivel="solido">SNS</li>
+              <li class="chip" data-nivel="solido">Serverless</li><li class="chip" data-nivel="diario">Microsserviços AWS</li>
+            </ul>
+          </article>
+
+          <article class="card reveal tone-fuchsia">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <h3>Segurança da Informação</h3>
+            <p>MBA na área e afinidade com criptografia — segurança pensada desde o desenho.</p>
+            <ul class="chips">
+              <li class="chip" data-nivel="solido">Criptografia</li>
+              <li class="chip" data-nivel="solido">Arquitetura segura</li>
+              <li class="chip" data-nivel="conhecimento">Privacidade e LGPD</li>
+            </ul>
+          </article>
+
+          <article class="card reveal tone-teal">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-check-circle"/></svg></span>
+            <h3>Qualidade</h3>
+            <p>Código que outra pessoa consegue ler, testar e manter.</p>
+            <ul class="chips">
+              <li class="chip" data-nivel="diario">Testes unitários</li><li class="chip" data-nivel="solido">Testes de integração</li>
+              <li class="chip" data-nivel="diario">Clean Code</li><li class="chip" data-nivel="diario">Code review</li>
+            </ul>
+          </article>
+
+          <article class="card reveal tone-indigo is-half">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-wrench"/></svg></span>
+            <h3>Ferramentas e métodos</h3>
+            <p>O dia a dia de um time ágil, do ticket ao deploy.</p>
+            <ul class="chips">
+              <li class="chip" data-nivel="diario">Git · GitHub</li><li class="chip" data-nivel="diario">Jira</li><li class="chip" data-nivel="solido">Linux</li>
+              <li class="chip" data-nivel="diario">Windows</li><li class="chip" data-nivel="solido">Scrum</li><li class="chip" data-nivel="solido">Agile</li><li class="chip" data-nivel="conhecimento">ITIL</li>
+            </ul>
+          </article>
+
+          <article class="card reveal tone-orange is-half">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span>
+            <h3>Pessoas e liderança</h3>
+            <p>Três anos e meio liderando o time de backend ensinam que código é a parte fácil.</p>
+            <ul class="chips">
+              <li class="chip">Liderança técnica</li><li class="chip">Planejamento</li>
+              <li class="chip">Comunicação assertiva</li><li class="chip">Proatividade</li>
+              <li class="chip">Empatia</li><li class="chip">Comprometimento</li><li class="chip">Inglês técnico</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 04 · PROJETOS ===================== -->
+    <section class="section" id="projetos">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">04 · <span>Projetos</span> <span class="class-tag">Público</span></p>
+          <h2 class="section-title">Negócios e projetos próprios</h2>
+          <p class="section-sub">Onde o código vira negócio — e onde eu testo, na prática, o que aprendo.</p>
+        </header>
+
+        <div class="projects">
+          <!-- PROJETO — copie o <article> inteiro (nos dois idiomas) -->
+          <article class="card project reveal tone-orange">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg></span>
+            <span class="role">Sócio-proprietário</span>
+            <h3>Uaus! Máximo 30</h3>
+            <p>Loja de variedades com tudo por até R$ 30, em Tapira-PR. Além de sócio, desenvolvo o sistema que roda a loja: estoque, vendas, promoções e catálogo.</p>
+            <a class="link-arrow" href="https://uaus.com.br" target="_blank" rel="noopener noreferrer">uaus.com.br <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          </article>
+          <!-- /PROJETO -->
+
+          <article class="card project reveal tone-crimson">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-utensils"/></svg></span>
+            <span class="role">Fundador</span>
+            <h3>iMenu</h3>
+            <p class="tagline">“Cada pedido no seu lugar. Veja seus lucros.”</p>
+            <p>Cardápio digital e sistema de atendimento para bares e lanchonetes, do pedido ao fechamento da conta. Em fase de piloto, por convite.</p>
+            <a class="link-arrow" href="https://imenudigital.com.br" target="_blank" rel="noopener noreferrer">imenudigital.com.br <svg class="i i-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          </article>
+
+          <article class="card project reveal tone-violet">
+            <span class="card-glow" aria-hidden="true"></span>
+            <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-trending"/></svg></span>
+            <span class="role">Criador</span>
+            <h3>Alphamira</h3>
+            <p>Projeto voltado a investimentos financeiros, onde o gosto pelo mercado encontra a engenharia de software.</p>
+            <span class="muted-link">Em breve</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 05 · INTERESSES ===================== -->
+    <section class="section" id="interesses">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">05 · <span>Interesses</span> <span class="class-tag">Público</span></p>
+          <h2 class="section-title">Fora do código</h2>
+          <p class="section-sub">O que me move quando o expediente acaba.</p>
+        </header>
+
+        <div class="interests">
+          <!-- INTERESSE / HOBBY — copie o <article> inteiro (nos dois idiomas).
+               Cores: tone-crimson | tone-violet | tone-sky | tone-fuchsia | tone-indigo | tone-teal | tone-orange -->
+          <article class="card interest reveal tone-violet">
+            <span class="card-icon"><svg class="i i-sm" aria-hidden="true"><use href="#i-trending"/></svg></span>
+            <h3>Mercado financeiro</h3>
+            <p>Estudo do mercado e robôs de investimento em MQL5.</p>
+          </article>
+          <!-- /INTERESSE -->
+          <article class="card interest reveal tone-fuchsia">
+            <span class="card-icon"><svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <h3>Segurança e privacidade</h3>
+            <p>Criptografia e proteção de dados — tema do meu MBA e assunto que sigo acompanhando.</p>
+          </article>
+          <article class="card interest reveal tone-orange">
+            <span class="card-icon"><svg class="i i-sm" aria-hidden="true"><use href="#i-rocket"/></svg></span>
+            <h3>Empreendedorismo</h3>
+            <p>Tirar ideias do papel: da loja física ao software próprio.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 06 · CONTATO ===================== -->
+    <section class="section" id="contato">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">06 · <span>Contato</span></p>
+          <h2 class="section-title">Vamos conversar?</h2>
+          <p class="section-sub">LinkedIn e GitHub estão abertos a todos. Telefone, WhatsApp, e-mail e currículo ficam na zona segura.</p>
+        </header>
+
+        <div class="contact-grid">
+          <div class="contact-public">
+            <a class="card contact-card reveal tone-sky" href="https://www.linkedin.com/in/engwagner/" target="_blank" rel="noopener noreferrer">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-linkedin"/></svg></span>
+              <div><h3>LinkedIn</h3><p>/in/engwagner</p></div>
+              <svg class="i i-arrow" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+            </a>
+            <a class="card contact-card reveal tone-indigo" href="https://github.com/EngWagner" target="_blank" rel="noopener noreferrer">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-github"/></svg></span>
+              <div><h3>GitHub</h3><p>@EngWagner</p></div>
+              <svg class="i i-arrow" aria-hidden="true"><use href="#i-arrow-up-right"/></svg>
+            </a>
+          </div>
+
+          <!-- RESTRITO: os dados reais chegam do Worker depois da verificação -->
+          <article class="card reveal tone-zone" data-zone-slot="contact">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="restricted-head">
+              <h3>Contato direto</h3>
+              <span class="class-tag is-restricted"><svg class="i i-sm" aria-hidden="true"><use href="#i-lock"/></svg><span>Restrito</span></span>
+            </div>
+            <div class="contact-rows" aria-hidden="true">
+              <div class="contact-row"><svg class="i i-sm"><use href="#i-phone"/></svg><div style="flex:1"><div class="label">Telefone</div><div class="redacted" style="margin:6px 0 0"><span style="width:55%"></span></div></div></div>
+              <div class="contact-row"><svg class="i i-sm"><use href="#i-chat"/></svg><div style="flex:1"><div class="label">WhatsApp</div><div class="redacted" style="margin:6px 0 0"><span style="width:40%"></span></div></div></div>
+              <div class="contact-row"><svg class="i i-sm"><use href="#i-mail"/></svg><div style="flex:1"><div class="label">E-mail</div><div class="redacted" style="margin:6px 0 0"><span style="width:70%"></span></div></div></div>
+              <div class="contact-row"><svg class="i i-sm"><use href="#i-pin"/></svg><div style="flex:1"><div class="label">Localização</div><div class="redacted" style="margin:6px 0 0"><span style="width:35%"></span></div></div></div>
+            </div>
+            <p class="locked-note" style="margin-top:18px"><svg class="i i-sm" aria-hidden="true"><use href="#i-lock"/></svg><span>Contato direto, redes pessoais e currículo em PDF ficam na zona segura.</span></p>
+            <button class="btn btn-zone btn-sm" type="button" data-zone-open>
+              <svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg><span>Desbloquear</span>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> Wagner Barbosa</span>
+      <span class="class-line"><svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg><span id="class-line">Você está vendo a versão pública.</span></span>
+      <a class="link-arrow" href="#inicio">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <!-- ===================== MODAL DA ZONA SEGURA ===================== -->
+  <dialog class="zone" id="zone-dialog" aria-labelledby="zone-title">
+    <!-- Painel 1: consentimento + verificação -->
+    <div data-pane="consent">
+      <div class="zone-head tone-zone">
+        <span class="card-glow" aria-hidden="true"></span>
+        <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></span>
+        <h2 id="zone-title">Entrar na zona segura</h2>
+        <p>Aqui ficam meu contato direto, o currículo e a minha história. Para mantê-los longe de robôs e de coleta automática, o acesso passa por uma verificação e fica registrado.</p>
+        <button class="icon-btn zone-close" type="button" data-zone-close aria-label="Fechar"><svg class="i i-sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
+      <div class="zone-body">
+        <div>
+          <h3>O que fica registrado</h3>
+          <ul class="zone-list">
+            <li><svg class="i i-sm" aria-hidden="true"><use href="#i-check"/></svg><span>Data e hora do acesso</span></li>
+            <li><svg class="i i-sm" aria-hidden="true"><use href="#i-check"/></svg><span>Seu endereço IP, guardado <strong>cifrado</strong> — só eu consigo ler, e só em caso de abuso</span></li>
+            <li><svg class="i i-sm" aria-hidden="true"><use href="#i-check"/></svg><span>País aproximado</span></li>
+            <li><svg class="i i-sm" aria-hidden="true"><use href="#i-check"/></svg><span>Navegador e sistema (user-agent)</span></li>
+            <li><svg class="i i-sm" aria-hidden="true"><use href="#i-check"/></svg><span>A versão deste termo (v1)</span></li>
+          </ul>
+        </div>
+        <div class="zone-facts">
+          <div class="zone-fact"><strong>Para quê</strong><span>Identificar, pela via legal, quem fizer mau uso destes dados.</span></div>
+          <div class="zone-fact"><strong>Por quanto tempo</strong><span>6 meses, com exclusão automática.</span></div>
+          <div class="zone-fact"><strong>Nunca</strong><span>Venda, compartilhamento ou publicidade.</span></div>
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="zone-consent">
+          <span>Li e concordo com o registro descrito acima. Posso pedir a exclusão quando quiser (LGPD).</span>
+        </label>
+        <div class="verify">
+          <div class="turnstile-box" id="turnstile-box"></div>
+          <p class="fine"><svg class="i i-sm" aria-hidden="true"><use href="#i-shield"/></svg><span>Verificação anti-robô feita pela Cloudflare (Turnstile).</span></p>
+        </div>
+        <p class="zone-error" id="zone-error" role="alert" hidden></p>
+      </div>
+      <div class="zone-foot">
+        <p class="fine">Pedidos de acesso ou exclusão do registro: pelo LinkedIn (/in/engwagner).</p>
+        <button class="btn btn-ghost btn-sm" type="button" data-zone-close>Cancelar</button>
+        <button class="btn btn-zone btn-sm" type="button" id="zone-enter" disabled>
+          <svg class="i i-sm" aria-hidden="true"><use href="#i-shield-check"/></svg><span>Entrar</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Painel 2: sessão ativa + transparência -->
+    <div data-pane="session" hidden>
+      <div class="zone-head tone-zone">
+        <span class="card-glow" aria-hidden="true"></span>
+        <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-shield-check"/></svg></span>
+        <h2 id="zone-session-title">Zona segura ativa</h2>
+        <p>Transparência: este é o registro que o seu acesso gerou.</p>
+        <button class="icon-btn zone-close" type="button" data-zone-close aria-label="Fechar"><svg class="i i-sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
+      <div class="zone-body">
+        <dl class="record" id="zone-record"></dl>
+      </div>
+      <div class="zone-foot">
+        <p class="fine">Para pedir acesso ou exclusão deste registro, fale comigo pelo LinkedIn.</p>
+        <button class="btn btn-ghost btn-sm" type="button" id="zone-exit">
+          <svg class="i i-sm" aria-hidden="true"><use href="#i-log-out"/></svg><span>Sair da zona segura</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><svg class="i i-sm" aria-hidden="true"><use href="#i-shield-check"/></svg><span id="toast-text"></span></div>
 </body>
-
 </html>
