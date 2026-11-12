@@ -24,7 +24,7 @@ body {
   overflow-x: hidden;
 }
 
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ul { list-style: none; }
@@ -526,6 +526,52 @@ html.zone-on .zone-tip .tip-on { display: block; }
   .interest-feature { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 32px; align-items: center; padding: 28px; }
   .garden figcaption { font-size: .8rem; }
 }
+/* Cada foto abre ampliada (js/lightbox.js); a lupa no canto avisa que dá para clicar */
+.garden a { display: block; width: 100%; height: 100%; cursor: zoom-in; }
+.garden a:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; border-radius: 14px; }
+.garden a::after {
+  content: ""; position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 9px;
+  background: rgb(0 0 0 / .45) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.6-3.6M11 8v6M8 11h6'/%3E%3C/svg%3E") center / 16px no-repeat;
+  opacity: .85; transition: opacity .2s;
+}
+.garden a:hover::after { opacity: 1; }
+.garden figcaption { pointer-events: none; }
+
+/* ---------- Foto ampliada (js/lightbox.js) ---------- */
+html.lb-open { overflow: hidden; }
+.lightbox {
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; overflow: hidden;
+  background: rgb(3 6 12 / .94); color: #fff;
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.lightbox[open] { display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.lightbox::backdrop { background: transparent; }
+.lb-stage { position: relative; display: grid; place-items: center; overflow: hidden; touch-action: none; user-select: none; cursor: zoom-in; }
+.lightbox.is-zoomed .lb-stage { cursor: grab; }
+.lightbox.is-zoomed .lb-stage:active { cursor: grabbing; }
+.lb-img { max-width: none; border-radius: 10px; transform-origin: 50% 50%; will-change: transform; -webkit-user-drag: none; }
+.lb-img.is-animating { transition: transform .28s var(--ease); }
+.lb-bar { padding: 10px 16px calc(14px + env(safe-area-inset-bottom, 0px)); text-align: center; }
+.lb-caption { font-weight: 600; font-size: .95rem; }
+.lb-hint { margin-top: 2px; font-size: .78rem; color: rgb(255 255 255 / .6); }
+.lb-btn {
+  position: absolute; display: grid; place-items: center; width: 44px; height: 44px;
+  border-radius: 12px; border: 1px solid rgb(255 255 255 / .16);
+  background: rgb(15 23 42 / .72); color: #fff; cursor: pointer;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: background-color .2s, opacity .2s;
+}
+.lb-btn:hover { background: rgb(30 41 59 / .92); }
+.lb-btn:disabled { opacity: .35; cursor: default; }
+.lb-btn[hidden] { display: none; }
+.lb-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lb-close { top: calc(10px + env(safe-area-inset-top, 0px)); right: 10px; }
+.lb-zoom { position: absolute; top: calc(10px + env(safe-area-inset-top, 0px)); left: 10px; display: flex; gap: 8px; }
+.lb-zoom .lb-btn { position: static; }
+.lb-prev, .lb-next { top: 50%; margin-top: -22px; }
+.lb-prev { left: 10px; }
+.lb-next { right: 10px; }
 
 /* ---------- Contato ---------- */
 .contact-grid { display: grid; gap: 16px; }

@@ -61,7 +61,8 @@ Cada item é um bloco de HTML marcado com comentário — copie, cole e preencha
 | Habilidade | `<li class="chip" data-nivel="diario\|solido\|conhecimento">` | dentro da categoria |
 | Projeto | `<article class="card project ...">` | `#projetos` |
 | Interesse ou hobby | `<article class="card interest ...">` | `#interesses` |
-| Interesse em destaque, com fotos | `<article class="card interest interest-feature ...">`; fotos quadradas em `images/interesses/` (480 e 800 px, WebP sem metadados) | `#interesses` |
+| Interesse em destaque, com fotos | `<article class="card interest interest-feature ...">`; fotos quadradas em `images/interesses/` (480 e 800 px, mais a `-full` que abre ampliada; WebP sem metadados) | `#interesses` |
+| Foto que abre ampliada, com zoom | `<a href="...-full.webp" data-lightbox="grupo">` em volta do `<img>` (`js/lightbox.js`) | qualquer seção |
 
 As grades se ajustam sozinhas ao número de cartões; nada precisa mudar no CSS
 ou no JS. Cores dos cartões: `tone-crimson`, `tone-violet`, `tone-sky`,
@@ -82,3 +83,10 @@ ou no JS. Cores dos cartões: `tone-crimson`, `tone-violet`, `tone-sky`,
 
 A `main` é publicada pelo GitHub Pages a cada push. Trabalhe numa branch e
 faça o merge só quando estiver pronto.
+
+**Mudou CSS ou JS? Troque o `?v=`** nos links de `css/` e `js/` das três
+páginas (`index.html`, `en/index.html` e `404.html`) — qualquer valor novo serve;
+a convenção é a data (`?v=20261112`), com sufixo se houver duas publicações no
+mesmo dia. A Cloudflare manda o navegador guardar CSS e JS por 4 horas: sem a
+troca, quem já visitou o site recebe o HTML novo com o CSS antigo. Pelo mesmo
+motivo, ao trocar uma foto, publique-a com um nome de arquivo novo.

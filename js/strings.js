@@ -45,7 +45,15 @@
       'record.expires': 'Sessão expira',
       'lvl.diario': '(uso diário)',
       'lvl.solido': '(experiência sólida)',
-      'lvl.conhecimento': '(conhecimento)'
+      'lvl.conhecimento': '(conhecimento)',
+      'lb.label': 'Foto ampliada',
+      'lb.close': 'Fechar',
+      'lb.prev': 'Foto anterior',
+      'lb.next': 'Próxima foto',
+      'lb.zoomIn': 'Aumentar o zoom',
+      'lb.zoomOut': 'Diminuir o zoom',
+      'lb.hintTouch': 'Toque duas vezes ou use dois dedos para dar zoom',
+      'lb.hintMouse': 'Clique ou use a roda do mouse para dar zoom · as setas trocam a foto'
     },
     en: {
       'theme.toLight': 'Switch to light theme',
@@ -85,7 +93,15 @@
       'record.expires': 'Session expires',
       'lvl.diario': '(daily use)',
       'lvl.solido': '(solid experience)',
-      'lvl.conhecimento': '(working knowledge)'
+      'lvl.conhecimento': '(working knowledge)',
+      'lb.label': 'Enlarged photo',
+      'lb.close': 'Close',
+      'lb.prev': 'Previous photo',
+      'lb.next': 'Next photo',
+      'lb.zoomIn': 'Zoom in',
+      'lb.zoomOut': 'Zoom out',
+      'lb.hintTouch': 'Double-tap or pinch to zoom',
+      'lb.hintMouse': 'Click or use the mouse wheel to zoom · arrow keys change the photo'
     }
   };
 
