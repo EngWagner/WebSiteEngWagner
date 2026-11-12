@@ -111,6 +111,7 @@
     <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol>
     <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
     <symbol id="i-graduation" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
     <symbol id="i-trending" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
     <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
@@ -626,6 +627,43 @@
         </header>
 
         <div class="interests">
+          <!-- INTERESSE EM DESTAQUE — cartão largo com fotos. Fotos: images/interesses/, quadradas,
+               em 480 e 800 px (WebP, sem metadados). Troque, tire ou acrescente <li> na lista .garden. -->
+          <article class="card interest interest-feature reveal tone-teal">
+            <span class="card-glow" aria-hidden="true"></span>
+            <div class="feature-text">
+              <span class="card-icon"><svg class="i" aria-hidden="true"><use href="#i-sprout"/></svg></span>
+              <h3>Hands in the soil</h3>
+              <p>After hours, I propagate fruit trees by grafting, air layering and cuttings, and grow corn, cassava and pumpkin together in the same bed. It's what I love doing away from the screen: it connects me with nature and teaches patience — results take weeks, sometimes months, to show.</p>
+              <ul class="chips" aria-label="Techniques">
+                <li class="chip">Grafting</li><li class="chip">Air layering</li><li class="chip">Cuttings</li><li class="chip">Intercropping</li>
+              </ul>
+            </div>
+            <ul class="garden" aria-label="Photos of my seedlings">
+              <li><figure>
+                <img src="../images/interesses/enxertos-manga-abacate-800.webp" srcset="../images/interesses/enxertos-manga-abacate-480.webp 480w, ../images/interesses/enxertos-manga-abacate-800.webp 800w" sizes="(min-width: 900px) 290px, calc(50vw - 46px)" width="800" height="800" loading="lazy" decoding="async"
+                     alt="Freshly grafted Palmer mango and avocado seedlings under plastic bags; the avocado seed shows at the base of the pot">
+                <figcaption>Palmer mango and avocado grafts</figcaption>
+              </figure></li>
+              <li><figure>
+                <img src="../images/interesses/alporquia-acerola-800.webp" srcset="../images/interesses/alporquia-acerola-480.webp 480w, ../images/interesses/alporquia-acerola-800.webp 800w" sizes="(min-width: 900px) 290px, calc(50vw - 46px)" width="800" height="800" loading="lazy" decoding="async"
+                     alt="An air layer on an acerola branch, wrapped in plastic and tied with string">
+                <figcaption>Acerola air layer</figcaption>
+              </figure></li>
+              <li><figure>
+                <img src="../images/interesses/consorcio-milho-mandioca-abobora-800.webp" srcset="../images/interesses/consorcio-milho-mandioca-abobora-480.webp 480w, ../images/interesses/consorcio-milho-mandioca-abobora-800.webp 800w" sizes="(min-width: 900px) 290px, calc(50vw - 46px)" width="800" height="800" loading="lazy" decoding="async"
+                     alt="Corn, cassava and pumpkin plants growing together in red soil">
+                <figcaption>Corn, cassava and pumpkin, intercropped</figcaption>
+              </figure></li>
+              <li><figure>
+                <img src="../images/interesses/estaquia-amora-pinha-800.webp" srcset="../images/interesses/estaquia-amora-pinha-480.webp 480w, ../images/interesses/estaquia-amora-pinha-800.webp 800w" sizes="(min-width: 900px) 290px, calc(50vw - 46px)" width="800" height="800" loading="lazy" decoding="async"
+                     alt="Mulberry and sugar apple cuttings sprouting in a bag of soil">
+                <figcaption>Mulberry and sugar apple cuttings</figcaption>
+              </figure></li>
+            </ul>
+          </article>
+          <!-- /INTERESSE EM DESTAQUE -->
+
           <!-- INTERESSE / HOBBY — copie o <article> inteiro (nos dois idiomas).
                Cores: tone-crimson | tone-violet | tone-sky | tone-fuchsia | tone-indigo | tone-teal | tone-orange -->
           <article class="card interest reveal tone-violet">

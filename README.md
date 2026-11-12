@@ -61,6 +61,7 @@ Cada item é um bloco de HTML marcado com comentário — copie, cole e preencha
 | Habilidade | `<li class="chip" data-nivel="diario\|solido\|conhecimento">` | dentro da categoria |
 | Projeto | `<article class="card project ...">` | `#projetos` |
 | Interesse ou hobby | `<article class="card interest ...">` | `#interesses` |
+| Interesse em destaque, com fotos | `<article class="card interest interest-feature ...">`; fotos quadradas em `images/interesses/` (480 e 800 px, WebP sem metadados) | `#interesses` |
 
 As grades se ajustam sozinhas ao número de cartões; nada precisa mudar no CSS
 ou no JS. Cores dos cartões: `tone-crimson`, `tone-violet`, `tone-sky`,
