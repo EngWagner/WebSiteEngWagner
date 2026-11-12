@@ -439,6 +439,26 @@ html.zone-on .zone-tip .tip-on { display: block; }
 .tl-card .org a { color: var(--accent); font-weight: 600; }
 .tl-card .org a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .tl-card > p { margin-top: 12px; }
+/* Logo da empresa (ou ícone, em formação e início) ao lado do título */
+.tl-head { display: flex; align-items: flex-start; gap: 14px; }
+.tl-head-text { min-width: 0; }
+.tl-logo {
+  flex: none; width: 48px; height: 48px; padding: 9px;
+  display: grid; place-items: center; overflow: hidden;
+  border-radius: 12px; border: 1px solid var(--border);
+  background: #fff; /* os logos foram desenhados para fundo claro */
+}
+.tl-logo img { width: 100%; height: 100%; object-fit: contain; }
+.tl-logo--full { padding: 0; } /* o logo já traz o próprio fundo */
+.tl-logo--icon { padding: 0; background: var(--surface-2); color: var(--marker, var(--accent)); }
+.tl-logo--icon .i { width: 22px; height: 22px; }
+/* O nome da empresa vem em destaque; o resto da linha (remoto, grupo) fica discreto */
+.tl-card .org > span:first-child { color: var(--text); font-weight: 600; font-size: 1rem; }
+@media (max-width: 479px) {
+  /* No celular a linha não cabe: empresa em cima, detalhe embaixo, sem o "·" sobrando */
+  .tl-card .org { flex-direction: column; align-items: flex-start; gap: 0; }
+  .tl-card .org > span[aria-hidden="true"] { display: none; }
+}
 .type-pill { font-family: var(--font-mono); font-size: .66rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--marker, var(--accent)); }
 .highlights { margin-top: 12px; display: grid; gap: 6px; }
 .highlights li { position: relative; padding-left: 18px; color: var(--text-muted); font-size: .93rem; }

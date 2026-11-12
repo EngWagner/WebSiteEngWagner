@@ -56,6 +56,7 @@ Cada item é um bloco de HTML marcado com comentário — copie, cole e preencha
 | Conteúdo | Bloco | Onde |
 | --- | --- | --- |
 | Experiência ou formação | `<li class="tl-item">` (`data-tipo`: `experiencia`, `formacao` ou `inicio`) | `#trajetoria` |
+| Logo da empresa | arquivo quadrado em `images/logos/` (até 96 px) e `<span class="tl-logo">` no item; sem logo, `tl-logo--icon` | dentro do item |
 | Categoria de habilidades | `<article class="card ...">` com `<ul class="chips">` | `#habilidades` |
 | Habilidade | `<li class="chip" data-nivel="diario\|solido\|conhecimento">` | dentro da categoria |
 | Projeto | `<article class="card project ...">` | `#projetos` |

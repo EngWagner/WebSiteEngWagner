@@ -110,6 +110,7 @@
     <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
     <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol>
     <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-graduation" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
     <symbol id="i-trending" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
     <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
@@ -311,14 +312,21 @@
         <ol class="timeline">
           <!-- ITEM DA TRAJETÓRIA — copie o <li> inteiro (nos dois idiomas).
                data-tipo: experiencia | formacao | inicio. O id vira link direto (#xp-...).
-               Ordem: do mais recente para o mais antigo (pela data de término). -->
+               Ordem: do mais recente para o mais antigo (pela data de término).
+               Logo: arquivo quadrado em images/logos/ (até 96 px), num ladrilho branco;
+               tl-logo--full se o logo já tem fundo próprio. Sem logo: tl-logo--icon. -->
           <li class="tl-item reveal" data-tipo="experiencia" id="xp-laborsolo">
             <p class="tl-date"><time datetime="2025-08">08/2025</time> – <span>atual</span></p>
             <span class="tl-marker" aria-hidden="true"></span>
             <article class="card tl-card">
-              <span class="type-pill">Experiência</span>
-              <h3>Desenvolvedor .NET · FullStack · DevOps</h3>
-              <p class="org"><span>Laborsolo do Brasil</span><span aria-hidden="true">·</span><span>remoto</span></p>
+              <div class="tl-head">
+                <span class="tl-logo"><img src="images/logos/laborsolo.png" alt="" width="56" height="56" loading="lazy" decoding="async"></span>
+                <div class="tl-head-text">
+                  <span class="type-pill">Experiência</span>
+                  <h3>Desenvolvedor .NET · FullStack · DevOps</h3>
+                  <p class="org"><span>Laborsolo do Brasil</span><span aria-hidden="true">·</span><span>remoto</span></p>
+                </div>
+              </div>
               <p>Laboratório de análise de solo com filiais no Brasil e no Paraguai. Desenvolvo sistemas web, mobile e desktop sobre bancos PostgreSQL compartilhados, incluindo LIMS e CRM.</p>
               <ul class="highlights">
                 <li>Sistemas web em .NET e Next.js, além de aplicações mobile e desktop</li>
@@ -336,9 +344,14 @@
             <p class="tl-date"><time datetime="2024-11">11/2024</time> – <time datetime="2025-06">06/2025</time></p>
             <span class="tl-marker" aria-hidden="true"></span>
             <article class="card tl-card">
-              <span class="type-pill">Experiência</span>
-              <h3>Desenvolvedor .NET Pleno</h3>
-              <p class="org"><span>Total Acesso</span><span aria-hidden="true">·</span><span>grupo Diverti</span></p>
+              <div class="tl-head">
+                <span class="tl-logo"><img src="images/logos/total-acesso.png" alt="" width="82" height="82" loading="lazy" decoding="async"></span>
+                <div class="tl-head-text">
+                  <span class="type-pill">Experiência</span>
+                  <h3>Desenvolvedor .NET Pleno</h3>
+                  <p class="org"><span>Total Acesso</span><span aria-hidden="true">·</span><span>grupo Diverti</span></p>
+                </div>
+              </div>
               <p>Ticketeria de eventos de pequeno a grande porte — entre eles a ExpoLondrina, os ingressos do SPFC e Barretos.</p>
               <ul class="highlights">
                 <li>Reconhecimento facial no acesso a grandes eventos</li>
@@ -355,9 +368,14 @@
             <p class="tl-date"><time datetime="2021-05">05/2021</time> – <time datetime="2024-11">11/2024</time></p>
             <span class="tl-marker" aria-hidden="true"></span>
             <article class="card tl-card">
-              <span class="type-pill">Experiência</span>
-              <h3>Desenvolvedor .NET e tech lead do backend</h3>
-              <p class="org"><span>Retornar</span></p>
+              <div class="tl-head">
+                <span class="tl-logo tl-logo--full"><img src="images/logos/retornar.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+                <div class="tl-head-text">
+                  <span class="type-pill">Experiência</span>
+                  <h3>Desenvolvedor .NET e tech lead do backend</h3>
+                  <p class="org"><span>Retornar</span></p>
+                </div>
+              </div>
               <p>E-commerce de e-books e outros produtos que dão direito a concorrer a prêmios com números da sorte.</p>
               <ul class="highlights">
                 <li>Backend em .NET e MongoDB, depois microsserviços na AWS com filas, DynamoDB e PostgreSQL</li>
@@ -374,9 +392,14 @@
             <p class="tl-date"><time datetime="2022">2022</time></p>
             <span class="tl-marker" aria-hidden="true"></span>
             <article class="card tl-card">
-              <span class="type-pill">Formação</span>
-              <h3>MBA em Segurança da Informação · Pós-graduação em Big Data</h3>
-              <p class="org"><span>Descomplica</span></p>
+              <div class="tl-head">
+                <span class="tl-logo tl-logo--icon" aria-hidden="true"><svg class="i"><use href="#i-graduation"/></svg></span>
+                <div class="tl-head-text">
+                  <span class="type-pill">Formação</span>
+                  <h3>MBA em Segurança da Informação · Pós-graduação em Big Data</h3>
+                  <p class="org"><span>Descomplica</span></p>
+                </div>
+              </div>
               <p>Criptografia, táticas de segurança e arquitetura de sistemas; dados relacionais e não relacionais em escala.</p>
             </article>
           </li>
@@ -385,9 +408,14 @@
             <p class="tl-date"><time datetime="2014">2014</time> – <time datetime="2021-12">2021</time></p>
             <span class="tl-marker" aria-hidden="true"></span>
             <article class="card tl-card">
-              <span class="type-pill">Formação</span>
-              <h3>Engenharia da Computação</h3>
-              <p class="org"><span>UNOPAR</span><span aria-hidden="true">·</span><span>Londrina-PR</span></p>
+              <div class="tl-head">
+                <span class="tl-logo tl-logo--icon" aria-hidden="true"><svg class="i"><use href="#i-graduation"/></svg></span>
+                <div class="tl-head-text">
+                  <span class="type-pill">Formação</span>
+                  <h3>Engenharia da Computação</h3>
+                  <p class="org"><span>UNOPAR</span><span aria-hidden="true">·</span><span>Londrina-PR</span></p>
+                </div>
+              </div>
               <p>Base em bancos de dados, linguagens de programação, cálculo, robótica e inteligência artificial.</p>
             </article>
           </li>
@@ -396,9 +424,14 @@
             <p class="tl-date"><time datetime="2019-05">05/2019</time> – <time datetime="2021-04">04/2021</time></p>
             <span class="tl-marker" aria-hidden="true"></span>
             <article class="card tl-card">
-              <span class="type-pill">Experiência</span>
-              <h3>Analista de Service Desk</h3>
-              <p class="org"><span>Tata Consultancy Services</span></p>
+              <div class="tl-head">
+                <span class="tl-logo"><img src="images/logos/tcs.svg" alt="" width="56" height="34" loading="lazy" decoding="async"></span>
+                <div class="tl-head-text">
+                  <span class="type-pill">Experiência</span>
+                  <h3>Analista de Service Desk</h3>
+                  <p class="org"><span>Tata Consultancy Services</span></p>
+                </div>
+              </div>
               <p>Multinacional indiana de consultoria em TI: metodologias ágeis, ITIL e ferramentas corporativas.</p>
               <ul class="chips" aria-label="Tecnologias">
                 <li class="chip">Scrum</li><li class="chip">ITIL</li><li class="chip">Control-M</li><li class="chip">SAP GUI</li><li class="chip">Active Directory</li><li class="chip">ServiceNow</li>
@@ -410,9 +443,14 @@
             <p class="tl-date"><time datetime="2014">2014</time> – <time datetime="2019">2019</time></p>
             <span class="tl-marker" aria-hidden="true"></span>
             <article class="card tl-card">
-              <span class="type-pill">Início</span>
-              <h3>Técnico de informática e suporte técnico</h3>
-              <p class="org"><span>Primeiros passos na TI</span></p>
+              <div class="tl-head">
+                <span class="tl-logo tl-logo--icon" aria-hidden="true"><svg class="i"><use href="#i-wrench"/></svg></span>
+                <div class="tl-head-text">
+                  <span class="type-pill">Início</span>
+                  <h3>Técnico de informática e suporte técnico</h3>
+                  <p class="org"><span>Primeiros passos na TI</span></p>
+                </div>
+              </div>
               <p>Onde tudo começou: primeiro como técnico de informática, depois no suporte técnico.</p>
             </article>
           </li>
@@ -572,7 +610,7 @@
             <span class="role">Criador</span>
             <h3>Alphamira</h3>
             <p>Projeto voltado a investimentos financeiros, onde o gosto pelo mercado encontra a engenharia de software.</p>
-            <span class="muted-link">Em breve</span>
+            <span class="muted-link">alphamira.com.br · em breve</span>
           </article>
         </div>
       </div>
